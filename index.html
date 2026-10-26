@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Todos os Produtos dos Videos</title>
+
+<style>
+:root{
+    --orange:#f4511e;
+    --orange2:#ff7a00;
+    --bg:#fff8f3;
+    --text:#222;
+    --muted:#777;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+}
+
+
+/* =========================
+   CABEÇALHO
+========================= */
+
+header{
+    background:linear-gradient(
+        135deg,
+        #f4511e,
+        #ff7a00
+    );
+
+    color:white;
+
+    padding:25px 16px;
+
+    box-shadow:
+        0 4px 18px #0002;
+}
+
+.site-title{
+    text-align:center;
+    cursor:pointer;
+    user-select:none;
+}
+
+.site-title h1{
+    margin:0;
+
+    font-size:
+        clamp(
+            24px,
+            6vw,
+            38px
+        );
+
+    font-weight:950;
+}
+
+.site-title p{
+    max-width:800px;
+
+    margin:
+        10px auto 0;
+
+    font-size:
+        clamp(
+            12px,
+            2.5vw,
+            15px
+        );
+
+    line-height:1.4;
+
+    font-weight:600;
+}
+
+
+/* =========================
+   CONTEÚDO
+========================= */
+
+main{
+    max-width:1100px;
+
+    margin:auto;
+
+    padding:
+        25px
+        16px
+        60px;
+}
+
+
+/* =========================
+   PESQUISA
+========================= */
+
+.search-area{
+    max-width:700px;
+
+    margin:
+        0 auto 25px;
+
+    position:relative;
+}
+
+.search{
+    width:100%;
+
+    height:52px;
+
+    border:
+        2px solid
+        #eee;
+
+    border-radius:16px;
+
+    padding:
+        0 48px;
+
+    background:white;
+
+    font-size:16px;
+
+    outline:none;
+
+    box-shadow:
+        0 5px 20px
+        #0000000c;
+}
+
+.search:focus{
+    border-color:
+        var(--orange);
+}
+
+.search-icon{
+    position:absolute;
+
+    left:17px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    font-size:20px;
+}
+
+.clear{
+    position:absolute;
+
+    right:10px;
+
+    top:50%;
+
+    transform:
+        translateY(-50%);
+
+    border:0;
+
+    width:32px;
+
+    height:32px;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    display:none;
+}
+
+
+/* =========================
+   PRODUTOS
+========================= */
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(
+                220px,
+                1fr
+            )
+        );
+
+    gap:16px;
+}
+
+.card{
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        #eee;
+
+    box-shadow:
+        0 5px 20px
+        #0000000c;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.card:hover{
+    transform:
+        translateY(-3px);
+}
+
+.product-image{
+    height:230px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#fff;
+
+    padding:8px;
+}
+
+.product-image img{
+    width:100%;
+
+    height:100%;
+
+    object-fit:contain;
+}
+
+.product-info{
+    padding:15px;
+}
+
+.product-name{
+    font-weight:800;
+
+    font-size:15px;
+
+    line-height:1.4;
+}
+
+
+/* =========================
+   ABA SENHA / DONO
+========================= */
+
+.panel{
+    max-width:700px;
+
+    margin:auto;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:
+        0 8px 30px
+        #0000000c;
+}
+
+.panel h2{
+    margin-top:0;
+}
+
+label{
+    display:block;
+
+    margin:
+        16px 0 7px;
+
+    font-size:14px;
+
+    font-weight:800;
+}
+
+input{
+    width:100%;
+
+    padding:14px;
+
+    border:
+        1px solid
+        #ddd;
+
+    border-radius:12px;
+
+    outline:none;
+}
+
+input:focus{
+    border-color:
+        var(--orange);
+}
+
+
+/* =========================
+   BOTÕES
+========================= */
+
+.btn{
+    margin-top:18px;
+
+    border:0;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            var(--orange2)
+        );
+
+    color:white;
+
+    padding:
+        13px
+        20px;
+
+    border-radius:12px;
+
+    font-weight:900;
+
+    cursor:pointer;
+}
+
+.btn:hover{
+    opacity:.92;
+}
+
+
+/* BOTÃO VOLTAR */
+
+.back{
+    border:
+        1px solid
+        #ffc7b3;
+
+    background:white;
+
+    color:
+        var(--orange);
+
+    padding:
+        10px
+        16px;
+
+    border-radius:12px;
+
+    font-weight:900;
+
+    cursor:pointer;
+
+    margin-bottom:20px;
+}
+
+.back:hover{
+    background:#fff4ee;
+}
+
+
+/* =========================
+   PAINEL DE VISITANTES
+========================= */
+
+.visitor-panel{
+    margin:
+        0 0 25px;
+
+    background:white;
+
+    border:
+        1px solid
+        #ffd9ca;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    text-align:center;
+
+    box-shadow:
+        0 7px 25px
+        #0000000b;
+}
+
+.visitor-number{
+    font-size:42px;
+
+    font-weight:950;
+
+    color:
+        var(--orange);
+}
+
+.visitor-text{
+    margin-top:6px;
+
+    color:#666;
+
+    font-size:14px;
+
+    font-weight:700;
+}
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+.upload{
+    display:block;
+
+    border:
+        2px dashed
+        #ffc5ad;
+
+    border-radius:14px;
+
+    padding:25px;
+
+    text-align:center;
+
+    color:#777;
+
+    cursor:pointer;
+}
+
+.upload strong{
+    display:block;
+
+    color:
+        var(--orange);
+
+    margin-bottom:6px;
+}
+
+
+/* =========================
+   LISTA DONO
+========================= */
+
+.admin-products{
+    max-width:700px;
+
+    margin:
+        30px auto;
+}
+
+.admin-item{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:white;
+
+    padding:12px;
+
+    border-radius:14px;
+
+    margin-bottom:10px;
+
+    box-shadow:
+        0 4px 15px
+        #00000008;
+}
+
+.admin-thumb{
+    width:60px;
+
+    height:60px;
+
+    object-fit:contain;
+
+    border-radius:10px;
+
+    background:#f5f5f5;
+}
+
+.admin-name{
+    flex:1;
+
+    font-weight:800;
+}
+
+.delete{
+    border:0;
+
+    background:#fff0ed;
+
+    color:#d32f2f;
+
+    padding:
+        9px
+        12px;
+
+    border-radius:10px;
+
+    font-weight:800;
+
+    cursor:pointer;
+}
+
+.error{
+    color:#d32f2f;
+
+    font-size:13px;
+
+    margin-top:10px;
+}
+
+.hidden{
+    display:none;
+}
+
+.empty{
+    text-align:center;
+
+    padding:30px;
+
+    color:#777;
+}
+
+
+/* =========================
+   CELULAR
+========================= */
+
+@media(max-width:600px){
+
+    .grid{
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+
+        gap:10px;
+    }
+
+    .product-image{
+        height:180px;
+    }
+
+    .product-info{
+        padding:11px;
+    }
+
+    .product-name{
+        font-size:13px;
+    }
+
+    .site-title h1{
+        font-size:23px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     CABEÇALHO
+========================= -->
+
+<header>
+
+    <div
+        class="site-title"
+        id="siteTitle"
+    >
+
+        <h1>
+            TODOS OS PRODUTOS DOS VIDEOS
+        </h1>
+
+        <p>
+            lembrando que cada produto desse é oficialmente da shoppe ao clicar ira ser direcionado para o produto na shoppe
+        </p>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     ABA PRINCIPAL
+========================= -->
+
+<main id="homePage">
+
+
+    <!-- PESQUISA -->
+
+    <div class="search-area">
+
+        <span class="search-icon">
+            🔎
+        </span>
+
+        <input
+            class="search"
+            id="search"
+            type="search"
+            placeholder="Pesquisar produto..."
+        >
+
+        <button
+            class="clear"
+            id="clearSearch"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="grid"
+        id="products"
+    ></div>
+
+
+</main>
+
+
+
+<!-- =========================
+     ABA SENHA
+========================= -->
+
+<main
+    id="passwordPage"
+    class="hidden"
+>
+
+    <div class="panel">
+
+        <h2>
+            ABA SENHA
+        </h2>
+
+        <label>
+            Digite a senha:
+        </label>
+
+        <input
+            id="password"
+            type="password"
+            placeholder="Digite a senha"
+        >
+
+        <button
+            class="btn"
+            id="confirm"
+        >
+            Confirma
+        </button>
+
+        <div
+            class="error"
+            id="passwordError"
+        ></div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =========================
+     ABA DONO
+========================= -->
+
+<main
+    id="ownerPage"
+    class="hidden"
+>
+
+
+    <!-- BOTÃO VOLTAR -->
+
+    <button
+        class="back"
+        id="backButton"
+    >
+
+        ← Voltar para a ABA principal
+
+    </button>
+
+
+
+    <!-- PAINEL DE VISITANTES -->
+
+    <div class="visitor-panel">
+
+        <div
+            class="visitor-number"
+            id="totalVisitors"
+        >
+            0
+        </div>
+
+        <div class="visitor-text">
+
+            pessoas entraram no site ao total
+
+        </div>
+
+    </div>
+
+
+
+    <!-- CADASTRO -->
+
+    <div class="panel">
+
+        <h2>
+            adicione um produto
+        </h2>
+
+
+        <label>
+            Imagem:
+        </label>
+
+
+        <label
+            class="upload"
+            for="image"
+        >
+
+            <strong>
+                📷 Escolher imagem
+            </strong>
+
+            Clique aqui para escolher
+            uma foto da galeria
+
+        </label>
+
+
+        <input
+            id="image"
+            type="file"
+            accept="image/*"
+            class="hidden"
+        >
+
+
+        <div
+            id="preview"
+        ></div>
+
+
+        <label>
+            Nome:
+        </label>
+
+
+        <input
+            id="name"
+            placeholder="Nome do produto"
+        >
+
+
+        <label>
+            Link:
+        </label>
+
+
+        <input
+            id="link"
+            type="url"
+            placeholder="https://..."
+        >
+
+
+        <button
+            class="btn"
+            id="add"
+        >
+
+            Adicionar produto
+
+        </button>
+
+
+        <div
+            class="error"
+            id="formError"
+        ></div>
+
+    </div>
+
+
+
+    <!-- TODOS OS PRODUTOS -->
+
+    <section
+        class="admin-products"
+    >
+
+        <h2>
+            TODOS OS PRODUTOS
+        </h2>
+
+        <div
+            id="adminList"
+        ></div>
+
+    </section>
+
+
+</main>
+
+
+
+<script>
+
+
+/* =========================
+   DADOS
+========================= */
+
+let products =
+    JSON.parse(
+        localStorage.getItem(
+            "products"
+        )
+    ) || [];
+
+
+
+/* =========================
+   ELEMENTOS
+========================= */
+
+const home =
+    document.getElementById(
+        "homePage"
+    );
+
+const passwordPage =
+    document.getElementById(
+        "passwordPage"
+    );
+
+const owner =
+    document.getElementById(
+        "ownerPage"
+    );
+
+const productsBox =
+    document.getElementById(
+        "products"
+    );
+
+
+
+/* =========================
+   NAVEGAÇÃO
+========================= */
+
+function show(page){
+
+    home.classList.add(
+        "hidden"
+    );
+
+    passwordPage.classList.add(
+        "hidden"
+    );
+
+    owner.classList.add(
+        "hidden"
+    );
+
+
+    page.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+
+/* =========================
+   5 CLIQUES NO TÍTULO
+========================= */
+
+let clicks = 0;
+
+let clickTimer;
+
+
+document
+    .getElementById(
+        "siteTitle"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            clicks++;
+
+            clearTimeout(
+                clickTimer
+            );
+
+            clickTimer =
+                setTimeout(
+                    () => {
+                        clicks = 0;
+                    },
+                    1500
+                );
+
+
+            if(clicks >= 5){
+
+                clicks = 0;
+
+                show(
+                    passwordPage
+                );
+
+                document
+                    .getElementById(
+                        "password"
+                    )
+                    .focus();
+
+            }
+
+        }
+    );
+
+
+
+/* =========================
+   SENHA
+========================= */
+
+document
+    .getElementById(
+        "confirm"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            const password =
+                document
+                    .getElementById(
+                        "password"
+                    )
+                    .value;
+
+
+            if(password === "000111"){
+
+                document
+                    .getElementById(
+                        "passwordError"
+                    )
+                    .textContent = "";
+
+
+                show(owner);
+
+                renderAdmin();
+
+                renderVisitors();
+
+            }
+
+            else{
+
+                document
+                    .getElementById(
+                        "passwordError"
+                    )
+                    .textContent =
+                    "Senha incorreta.";
+
+            }
+
+        }
+    );
+
+
+
+/* =========================
+   BOTÃO VOLTAR
+========================= */
+
+document
+    .getElementById(
+        "backButton"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            show(home);
+
+        }
+    );
+
+
+
+/* =========================
+   SALVAR
+========================= */
+
+function saveProducts(){
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(
+            products
+        )
+    );
+
+}
+
+
+
+/* =========================
+   PRODUTOS
+========================= */
+
+function renderProducts(
+    searchText = ""
+){
+
+    productsBox.innerHTML = "";
+
+
+    const search =
+        searchText
+            .trim()
+            .toLowerCase();
+
+
+    const filtered =
+        products.filter(
+            product =>
+                product.name
+                    .toLowerCase()
+                    .includes(search)
+        );
+
+
+    if(filtered.length === 0){
+
+        productsBox.innerHTML = `
+
+            <div
+                class="empty"
+                style="grid-column:1/-1"
+            >
+
+                🔎
+
+                <br><br>
+
+                Nenhum produto encontrado.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    filtered.forEach(
+        product => {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "card";
+
+
+            card.innerHTML = `
+
+                <div
+                    class="product-image"
+                >
+
+                    ${
+                        product.image
+
+                        ?
+
+                        `<img
+                            src="${product.image}"
+                            alt="${product.name}"
+                        >`
+
+                        :
+
+                        `<span
+                            style="font-size:50px"
+                        >
+                            🛍️
+                        </span>`
+                    }
+
+                </div>
+
+
+                <div
+                    class="product-info"
+                >
+
+                    <div
+                        class="product-name"
+                    >
+
+                        ${product.name}
+
+                    </div>
+
+                </div>
+
+            `;
+
+
+            card.onclick = () => {
+
+                if(
+                    product.link
+                ){
+
+                    window.open(
+                        product.link,
+                        "_blank"
+                    );
+
+                }
+
+            };
+
+
+            productsBox.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================
+   PESQUISA
+========================= */
+
+document
+    .getElementById(
+        "search"
+    )
+    .addEventListener(
+        "input",
+        event => {
+
+            const value =
+                event.target.value;
+
+
+            renderProducts(
+                value
+            );
+
+
+            document
+                .getElementById(
+                    "clearSearch"
+                )
+                .style.display =
+                value
+                    ? "block"
+                    : "none";
+
+        }
+    );
+
+
+
+/* LIMPAR */
+
+document
+    .getElementById(
+        "clearSearch"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById(
+                    "search"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "clearSearch"
+                )
+                .style.display =
+                "none";
+
+
+            renderProducts();
+
+        }
+    );
+
+
+
+/* =========================
+   IMAGEM
+========================= */
+
+let selectedImage = "";
+
+
+document
+    .getElementById(
+        "image"
+    )
+    .addEventListener(
+        "change",
+        event => {
+
+            const file =
+                event.target.files[0];
+
+
+            if(!file)
+                return;
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                () => {
+
+                    selectedImage =
+                        reader.result;
+
+
+                    document
+                        .getElementById(
+                            "preview"
+                        )
+                        .innerHTML = `
+
+                            <img
+                                src="${selectedImage}"
+                                style="
+                                    width:100%;
+                                    max-height:220px;
+                                    object-fit:contain;
+                                    margin-top:12px;
+                                    border-radius:14px;
+                                "
+                            >
+
+                        `;
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+    );
+
+
+
+/* =========================
+   ADICIONAR PRODUTO
+========================= */
+
+document
+    .getElementById(
+        "add"
+    )
+    .addEventListener(
+        "click",
+        () => {
+
+            const name =
+                document
+                    .getElementById(
+                        "name"
+                    )
+                    .value
+                    .trim();
+
+
+            const link =
+                document
+                    .getElementById(
+                        "link"
+                    )
+                    .value
+                    .trim();
+
+
+            if(!name || !link){
+
+                document
+                    .getElementById(
+                        "formError"
+                    )
+                    .textContent =
+                    "Preencha o nome e o link.";
+
+                return;
+
+            }
+
+
+            products.push({
+
+                name:name,
+
+                image:selectedImage,
+
+                link:link
+
+            });
+
+
+            saveProducts();
+
+
+            document
+                .getElementById(
+                    "name"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "link"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "image"
+                )
+                .value = "";
+
+
+            document
+                .getElementById(
+                    "preview"
+                )
+                .innerHTML = "";
+
+
+            document
+                .getElementById(
+                    "formError"
+                )
+                .textContent = "";
+
+
+            selectedImage = "";
+
+
+            renderProducts();
+
+            renderAdmin();
+
+        }
+    );
+
+
+
+/* =========================
+   LISTA DO DONO
+========================= */
+
+function renderAdmin(){
+
+    const list =
+        document.getElementById(
+            "adminList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if(products.length === 0){
+
+        list.innerHTML = `
+
+            <div class="empty">
+
+                Nenhum produto cadastrado.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    products.forEach(
+        (product,index) => {
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "admin-item";
+
+
+            item.innerHTML = `
+
+                ${
+                    product.image
+
+                    ?
+
+                    `<img
+                        class="admin-thumb"
+                        src="${product.image}"
+                    >`
+
+                    :
+
+                    `<div
+                        class="admin-thumb"
+                        style="
+                            display:flex;
+                            align-items:center;
+                            justify-content:center;
+                            font-size:25px;
+                        "
+                    >
+                        🛍️
+                    </div>`
+                }
+
+
+                <div
+                    class="admin-name"
+                >
+
+                    ${product.name}
+
+                </div>
+
+
+                <button
+                    class="delete"
+                >
+
+                    Deletar
+
+                </button>
+
+            `;
+
+
+            item
+                .querySelector(
+                    ".delete"
+                )
+                .onclick = () => {
+
+                    products.splice(
+                        index,
+                        1
+                    );
+
+
+                    saveProducts();
+
+                    renderProducts();
+
+                    renderAdmin();
+
+                };
+
+
+            list.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================
+   CONTADOR TOTAL DE VISITANTES
+========================= */
+
+/*
+   Esta versão usa o navegador apenas
+   para a prévia.
+
+   Para contar TODOS os visitantes
+   de TODOS os aparelhos de verdade,
+   depois vamos conectar a um banco online.
+*/
+
+let totalVisitors =
+    Number(
+        localStorage.getItem(
+            "totalVisitors"
+        )
+    ) || 0;
+
+
+if(
+    !sessionStorage.getItem(
+        "thisVisitCounted"
+    )
+){
+
+    totalVisitors++;
+
+
+    localStorage.setItem(
+        "totalVisitors",
+        totalVisitors
+    );
+
+
+    sessionStorage.setItem(
+        "thisVisitCounted",
+        "yes"
+    );
+
+}
+
+
+
+function renderVisitors(){
+
+    const counter =
+        document.getElementById(
+            "totalVisitors"
+        );
+
+
+    counter.textContent =
+        totalVisitors.toLocaleString(
+            "pt-BR"
+        );
+
+}
+
+
+
+/* =========================
+   INICIAR
+========================= */
+
+renderProducts();
+
+renderVisitors();
+
+</script>
+
+</body>
+</html>

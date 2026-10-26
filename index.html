@@ -1,310 +1,699 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Todos os Produtos dos Videos</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    TODOS OS PRODUTOS DOS VIDEOS
+</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
 <style>
+
 *{
     box-sizing:border-box;
 }
 
+
 body{
+
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     background:#fff7f2;
+
     color:#222;
+
 }
+
+
+/* =========================
+   CABEÇALHO
+========================= */
 
 header{
-    background:linear-gradient(135deg,#ee4d2d,#ff7300);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ee4d2d,
+            #ff7300
+        );
+
     color:white;
-    padding:28px 15px;
-    box-shadow:0 4px 20px #0002;
+
+    padding:
+        28px 15px;
+
+    box-shadow:
+        0 4px 20px #0002;
+
 }
+
 
 .title{
+
     text-align:center;
+
     cursor:pointer;
+
     user-select:none;
+
 }
+
 
 .title h1{
+
     margin:0;
-    font-size:clamp(25px,6vw,40px);
+
+    font-size:
+        clamp(
+            25px,
+            6vw,
+            40px
+        );
+
     font-weight:900;
+
 }
+
 
 .title p{
+
     max-width:850px;
-    margin:12px auto 0;
+
+    margin:
+        12px auto 0;
+
     font-size:14px;
+
     font-weight:bold;
+
     line-height:1.5;
+
 }
+
+
+/* =========================
+   PÁGINAS
+========================= */
 
 main{
+
     max-width:1100px;
+
     margin:auto;
-    padding:25px 15px 60px;
+
+    padding:
+        25px 15px 60px;
+
 }
+
 
 .hidden{
-    display:none!important;
+
+    display:none !important;
+
 }
+
+
+/* =========================
+   PESQUISA
+========================= */
 
 .search-box{
+
     max-width:700px;
-    margin:0 auto 25px;
+
+    margin:
+        0 auto 25px;
+
 }
+
 
 .search-box input{
+
     width:100%;
+
     height:52px;
-    border:2px solid #eee;
+
+    border:
+        2px solid #eee;
+
     border-radius:15px;
-    padding:0 18px;
+
+    padding:
+        0 18px;
+
     font-size:16px;
+
     outline:none;
+
     background:white;
+
 }
+
 
 .search-box input:focus{
-    border-color:#ee4d2d;
+
+    border-color:
+        #ee4d2d;
+
 }
+
+
+/* =========================
+   PRODUTOS
+========================= */
 
 .products{
+
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(
+                220px,
+                1fr
+            )
+        );
+
     gap:16px;
+
 }
+
 
 .card{
+
     background:white;
+
     border-radius:18px;
+
     overflow:hidden;
-    box-shadow:0 5px 20px #00000012;
+
+    box-shadow:
+        0 5px 20px #00000012;
+
     cursor:pointer;
-    transition:.2s;
+
+    transition:
+        transform .2s,
+        box-shadow .2s;
+
 }
+
 
 .card:hover{
-    transform:translateY(-4px);
+
+    transform:
+        translateY(-4px);
+
+    box-shadow:
+        0 10px 25px #00000018;
+
 }
+
 
 .card-image{
+
     height:230px;
+
     padding:8px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     background:white;
+
 }
+
 
 .card-image img{
+
     width:100%;
+
     height:100%;
+
     object-fit:contain;
+
 }
+
 
 .card-name{
+
     padding:15px;
+
     font-size:15px;
+
     font-weight:800;
+
+    line-height:1.4;
+
 }
+
+
+/* =========================
+   PAINEL
+========================= */
 
 .panel{
+
     max-width:700px;
+
     margin:auto;
+
     padding:25px;
+
     background:white;
+
     border-radius:20px;
-    box-shadow:0 8px 30px #00000010;
+
+    box-shadow:
+        0 8px 30px #00000010;
+
 }
+
 
 .panel h2{
+
     margin-top:0;
+
 }
+
 
 label{
+
     display:block;
-    margin:17px 0 7px;
+
+    margin:
+        17px 0 7px;
+
     font-size:14px;
+
     font-weight:bold;
+
 }
+
 
 input{
+
     width:100%;
+
     padding:14px;
-    border:1px solid #ddd;
+
+    border:
+        1px solid #ddd;
+
     border-radius:12px;
+
     outline:none;
+
     font-size:15px;
+
 }
 
-button{
-    cursor:pointer;
+
+input:focus{
+
+    border-color:
+        #ee4d2d;
+
 }
+
+
+/* =========================
+   BOTÕES
+========================= */
 
 .btn{
+
     margin-top:18px;
+
     border:0;
-    padding:14px 20px;
+
+    padding:
+        14px 20px;
+
     border-radius:12px;
-    background:linear-gradient(135deg,#ee4d2d,#ff7300);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ee4d2d,
+            #ff7300
+        );
+
     color:white;
+
     font-weight:900;
+
+    cursor:pointer;
+
 }
+
+
+.btn:hover{
+
+    opacity:.9;
+
+}
+
 
 .back{
-    border:1px solid #ffc8b4;
+
+    border:
+        1px solid #ffc8b4;
+
     background:white;
+
     color:#ee4d2d;
-    padding:11px 16px;
+
+    padding:
+        11px 16px;
+
     border-radius:12px;
+
     font-weight:900;
+
+    cursor:pointer;
+
     margin-bottom:20px;
+
 }
+
+
+.back:hover{
+
+    background:#fff2eb;
+
+}
+
+
+/* =========================
+   UPLOAD
+========================= */
 
 .upload{
+
     display:block;
+
     padding:25px;
+
     text-align:center;
-    border:2px dashed #ffc2ad;
+
+    border:
+        2px dashed #ffc2ad;
+
     border-radius:14px;
+
     color:#777;
+
     cursor:pointer;
+
 }
+
 
 .upload strong{
+
     display:block;
+
     color:#ee4d2d;
+
     margin-bottom:6px;
+
 }
+
 
 .preview{
+
     margin-top:12px;
+
     text-align:center;
+
 }
+
 
 .preview img{
+
     width:100%;
+
     max-height:230px;
+
     object-fit:contain;
+
     border-radius:14px;
+
 }
+
+
+/* =========================
+   VISITANTES
+========================= */
 
 .visitors{
+
     max-width:700px;
-    margin:0 auto 25px;
+
+    margin:
+        0 auto 25px;
+
     padding:22px;
+
     background:white;
+
     border-radius:18px;
+
     text-align:center;
-    box-shadow:0 7px 25px #0000000d;
+
+    box-shadow:
+        0 7px 25px #0000000d;
+
 }
+
 
 .visitor-number{
+
     font-size:45px;
+
     font-weight:900;
+
     color:#ee4d2d;
+
 }
+
 
 .visitor-text{
+
     color:#666;
+
     font-size:14px;
+
     font-weight:bold;
+
 }
+
+
+/* =========================
+   ADMIN
+========================= */
 
 .admin-list{
+
     max-width:700px;
-    margin:30px auto;
+
+    margin:
+        30px auto;
+
 }
+
 
 .admin-item{
+
     display:flex;
+
     align-items:center;
+
     gap:12px;
+
     background:white;
+
     padding:12px;
+
     border-radius:14px;
+
     margin-bottom:10px;
-    box-shadow:0 4px 15px #00000008;
+
+    box-shadow:
+        0 4px 15px #00000008;
+
 }
+
 
 .admin-thumb{
+
     width:60px;
+
     height:60px;
+
     object-fit:contain;
+
     border-radius:10px;
+
     background:#f5f5f5;
+
 }
+
 
 .admin-name{
+
     flex:1;
+
     font-weight:bold;
+
 }
+
 
 .delete{
+
     border:0;
+
     background:#fff0ed;
+
     color:#d32f2f;
-    padding:9px 12px;
+
+    padding:
+        9px 12px;
+
     border-radius:10px;
+
     font-weight:bold;
+
+    cursor:pointer;
+
 }
+
+
+/* =========================
+   MENSAGENS
+========================= */
 
 .error{
+
     color:#d32f2f;
+
     margin-top:10px;
+
     font-size:14px;
+
 }
+
 
 .success{
+
     color:#16803c;
+
     margin-top:10px;
+
     font-size:14px;
+
 }
 
+
 .empty{
-    grid-column:1/-1;
+
+    grid-column:
+        1 / -1;
+
     text-align:center;
+
     padding:40px;
+
     color:#777;
+
 }
+
+
+/* =========================
+   RESPONSIVO
+========================= */
 
 @media(max-width:600px){
 
     .products{
-        grid-template-columns:repeat(2,minmax(0,1fr));
+
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(
+                    0,
+                    1fr
+                )
+            );
+
         gap:10px;
+
     }
+
 
     .card-image{
+
         height:180px;
+
     }
+
 
     .card-name{
+
         padding:11px;
+
         font-size:13px;
+
     }
 
+
     .title h1{
+
         font-size:24px;
+
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =================================
+     CABEÇALHO
+================================= -->
+
 <header>
 
-    <div class="title" id="siteTitle">
+    <div
+        class="title"
+        id="siteTitle"
+    >
 
         <h1>
             TODOS OS PRODUTOS DOS VIDEOS
@@ -319,11 +708,18 @@ button{
 </header>
 
 
-<!-- ABA PRINCIPAL -->
 
-<main id="homePage">
+<!-- =================================
+     ABA PRINCIPAL
+================================= -->
 
-    <div class="search-box">
+<main
+    id="homePage"
+>
+
+    <div
+        class="search-box"
+    >
 
         <input
             id="search"
@@ -333,6 +729,7 @@ button{
 
     </div>
 
+
     <div
         class="products"
         id="products"
@@ -341,20 +738,29 @@ button{
 </main>
 
 
-<!-- ABA SENHA -->
+
+<!-- =================================
+     ABA SENHA
+================================= -->
 
 <main
     id="passwordPage"
     class="hidden"
 >
 
-    <div class="panel">
+    <div
+        class="panel"
+    >
 
-        <h2>ABA SENHA</h2>
+        <h2>
+            ABA SENHA
+        </h2>
+
 
         <label>
             Digite a senha:
         </label>
+
 
         <input
             id="password"
@@ -362,12 +768,16 @@ button{
             placeholder="Digite a senha"
         >
 
+
         <button
             class="btn"
             id="confirmPassword"
         >
+
             Confirma
+
         </button>
+
 
         <div
             class="error"
@@ -379,22 +789,33 @@ button{
 </main>
 
 
-<!-- ABA DONO -->
+
+<!-- =================================
+     ABA DONO
+================================= -->
 
 <main
     id="ownerPage"
     class="hidden"
 >
 
+
     <button
         class="back"
         id="backButton"
     >
+
         ← Voltar para a ABA principal
+
     </button>
 
 
-    <div class="visitors">
+
+    <!-- VISITANTES -->
+
+    <div
+        class="visitors"
+    >
 
         <div
             class="visitor-number"
@@ -403,14 +824,24 @@ button{
             0
         </div>
 
-        <div class="visitor-text">
+
+        <div
+            class="visitor-text"
+        >
+
             pessoas entraram no site ao total
+
         </div>
 
     </div>
 
 
-    <div class="panel">
+
+    <!-- FORMULÁRIO -->
+
+    <div
+        class="panel"
+    >
 
         <h2>
             adicione um produto
@@ -420,6 +851,7 @@ button{
         <label>
             Imagem:
         </label>
+
 
         <label
             class="upload"
@@ -433,6 +865,7 @@ button{
             Clique aqui para escolher uma foto
 
         </label>
+
 
         <input
             id="image"
@@ -448,9 +881,11 @@ button{
         ></div>
 
 
+
         <label>
             Nome:
         </label>
+
 
         <input
             id="name"
@@ -459,9 +894,11 @@ button{
         >
 
 
+
         <label>
             Link:
         </label>
+
 
         <input
             id="link"
@@ -470,11 +907,14 @@ button{
         >
 
 
+
         <button
             class="btn"
             id="addProduct"
         >
+
             Adicionar produto
+
         </button>
 
 
@@ -485,30 +925,43 @@ button{
     </div>
 
 
-    <section class="admin-list">
+
+    <!-- TODOS OS PRODUTOS -->
+
+    <section
+        class="admin-list"
+    >
 
         <h2>
             TODOS OS PRODUTOS
         </h2>
 
-        <div id="adminList"></div>
+
+        <div
+            id="adminList"
+        ></div>
 
     </section>
 
 </main>
 
 
+
 <script>
+
 
 /* ==========================================
    SUPABASE
 ========================================== */
 
+
 const SUPABASE_URL =
     "https://nndwzyikpibdxxzwghzm.supabase.co";
 
+
 const SUPABASE_KEY =
     "sb_publishable_Rl3Kbvn6ygWnhKfNBFadEg_-lia60Qg";
+
 
 const supabaseClient =
     window.supabase.createClient(
@@ -517,196 +970,322 @@ const supabaseClient =
     );
 
 
+
 /* ==========================================
    ELEMENTOS
 ========================================== */
 
+
 const homePage =
-    document.getElementById("homePage");
+    document.getElementById(
+        "homePage"
+    );
+
 
 const passwordPage =
-    document.getElementById("passwordPage");
+    document.getElementById(
+        "passwordPage"
+    );
+
 
 const ownerPage =
-    document.getElementById("ownerPage");
+    document.getElementById(
+        "ownerPage"
+    );
+
 
 const productsBox =
-    document.getElementById("products");
+    document.getElementById(
+        "products"
+    );
+
 
 const search =
-    document.getElementById("search");
+    document.getElementById(
+        "search"
+    );
+
 
 
 /* ==========================================
    NAVEGAÇÃO
 ========================================== */
 
+
 function showPage(page){
 
-    homePage.classList.add("hidden");
+    homePage.classList.add(
+        "hidden"
+    );
 
-    passwordPage.classList.add("hidden");
 
-    ownerPage.classList.add("hidden");
+    passwordPage.classList.add(
+        "hidden"
+    );
 
-    page.classList.remove("hidden");
+
+    ownerPage.classList.add(
+        "hidden"
+    );
+
+
+    page.classList.remove(
+        "hidden"
+    );
+
 }
+
 
 
 /* ==========================================
    5 CLIQUES NO TÍTULO
 ========================================== */
 
+
 let titleClicks = 0;
 
 let clickTimer = null;
 
+
 document
-.getElementById("siteTitle")
-.addEventListener("click",function(){
+    .getElementById(
+        "siteTitle"
+    )
+    .addEventListener(
+        "click",
+        function(){
 
-    titleClicks++;
-
-    clearTimeout(clickTimer);
-
-    clickTimer = setTimeout(function(){
-
-        titleClicks = 0;
-
-    },1500);
+            titleClicks++;
 
 
-    if(titleClicks >= 5){
+            clearTimeout(
+                clickTimer
+            );
 
-        titleClicks = 0;
 
-        showPage(passwordPage);
+            clickTimer =
+                setTimeout(
+                    function(){
 
-        document
-        .getElementById("password")
-        .focus();
+                        titleClicks = 0;
 
-    }
+                    },
+                    1500
+                );
 
-});
+
+            if(
+                titleClicks >= 5
+            ){
+
+                titleClicks = 0;
+
+
+                showPage(
+                    passwordPage
+                );
+
+
+                document
+                    .getElementById(
+                        "password"
+                    )
+                    .focus();
+
+            }
+
+        }
+    );
+
 
 
 /* ==========================================
    SENHA
 ========================================== */
 
+
 document
-.getElementById("confirmPassword")
-.addEventListener("click",function(){
+    .getElementById(
+        "confirmPassword"
+    )
+    .addEventListener(
+        "click",
+        function(){
 
-    const password =
-        document
-        .getElementById("password")
-        .value;
+            const password =
+                document
+                    .getElementById(
+                        "password"
+                    )
+                    .value;
 
 
-    if(password === "000111"){
+            if(
+                password ===
+                "000111"
+            ){
 
-        document
-        .getElementById("passwordError")
-        .textContent = "";
+                document
+                    .getElementById(
+                        "passwordError"
+                    )
+                    .textContent = "";
 
-        showPage(ownerPage);
 
-        loadAdminProducts();
+                showPage(
+                    ownerPage
+                );
 
-        loadVisitors();
 
-    }
+                loadAdminProducts();
 
-    else{
+                loadVisitors();
 
-        document
-        .getElementById("passwordError")
-        .textContent =
-            "Senha incorreta.";
+            }
 
-    }
+            else{
 
-});
+                document
+                    .getElementById(
+                        "passwordError"
+                    )
+                    .textContent =
+                    "Senha incorreta.";
+
+            }
+
+        }
+    );
+
 
 
 /* ==========================================
    ENTER NA SENHA
 ========================================== */
 
+
 document
-.getElementById("password")
-.addEventListener("keydown",function(event){
+    .getElementById(
+        "password"
+    )
+    .addEventListener(
+        "keydown",
+        function(event){
 
-    if(event.key === "Enter"){
+            if(
+                event.key ===
+                "Enter"
+            ){
 
-        document
-        .getElementById("confirmPassword")
-        .click();
+                document
+                    .getElementById(
+                        "confirmPassword"
+                    )
+                    .click();
 
-    }
+            }
 
-});
+        }
+    );
+
 
 
 /* ==========================================
    VOLTAR
 ========================================== */
 
+
 document
-.getElementById("backButton")
-.addEventListener("click",function(){
+    .getElementById(
+        "backButton"
+    )
+    .addEventListener(
+        "click",
+        function(){
 
-    showPage(homePage);
+            showPage(
+                homePage
+            );
 
-});
+        }
+    );
+
 
 
 /* ==========================================
-   ESCAPAR TEXTO
+   PROTEÇÃO DE TEXTO
 ========================================== */
+
 
 function escapeHTML(text){
 
-    return String(text ?? "")
+    return String(
+        text ?? ""
+    )
 
-    .replace(/&/g,"&amp;")
+    .replace(
+        /&/g,
+        "&amp;"
+    )
 
-    .replace(/</g,"&lt;")
+    .replace(
+        /</g,
+        "&lt;"
+    )
 
-    .replace(/>/g,"&gt;")
+    .replace(
+        />/g,
+        "&gt;"
+    )
 
-    .replace(/"/g,"&quot;")
+    .replace(
+        /"/g,
+        "&quot;"
+    )
 
-    .replace(/'/g,"&#039;");
+    .replace(
+        /'/g,
+        "&#039;"
+    );
 
 }
+
 
 
 /* ==========================================
    CARREGAR PRODUTOS
 ========================================== */
 
+
 async function loadProducts(){
 
     const result =
         await supabaseClient
-        .from("produtos")
-        .select("*")
-        .order(
-            "criado_em",
-            {
-                ascending:false
-            }
-        );
+
+            .from(
+                "produtos"
+            )
+
+            .select(
+                "*"
+            )
+
+            .order(
+                "criado_em",
+                {
+                    ascending:false
+                }
+            );
 
 
-    if(result.error){
+    if(
+        result.error
+    ){
 
         console.error(
             result.error
         );
+
 
         productsBox.innerHTML = `
 
@@ -730,34 +1309,45 @@ async function loadProducts(){
 }
 
 
+
 /* ==========================================
    MOSTRAR PRODUTOS
 ========================================== */
 
-function renderProducts(products){
+
+function renderProducts(
+    products
+){
 
     const text =
         search.value
-        .trim()
-        .toLowerCase();
+            .trim()
+            .toLowerCase();
 
 
     const filtered =
-        products.filter(function(product){
+        products.filter(
+            function(product){
 
-            return String(
-                product.nome || ""
-            )
-            .toLowerCase()
-            .includes(text);
+                return String(
+                    product.nome || ""
+                )
+                .toLowerCase()
+                .includes(
+                    text
+                );
 
-        });
+            }
+        );
 
 
-    productsBox.innerHTML = "";
+    productsBox.innerHTML =
+        "";
 
 
-    if(filtered.length === 0){
+    if(
+        filtered.length === 0
+    ){
 
         productsBox.innerHTML = `
 
@@ -774,75 +1364,96 @@ function renderProducts(products){
     }
 
 
-    filtered.forEach(function(product){
+    filtered.forEach(
+        function(product){
 
-        const card =
-            document.createElement("div");
-
-
-        card.className = "card";
-
-
-        const image =
-            product.imagem
-            ?
-
-            `<img
-                src="${product.imagem}"
-                alt="${escapeHTML(product.nome)}"
-            >`
-
-            :
-
-            `<span style="font-size:55px">
-                🛍️
-            </span>`;
+            const card =
+                document.createElement(
+                    "div"
+                );
 
 
-        card.innerHTML = `
-
-            <div class="card-image">
-
-                ${image}
-
-            </div>
-
-            <div class="card-name">
-
-                ${escapeHTML(product.nome)}
-
-            </div>
-
-        `;
+            card.className =
+                "card";
 
 
-        card.addEventListener(
-            "click",
-            function(){
+            const image =
+                product.imagem
 
-                if(product.link){
+                ?
 
-                    window.open(
-                        product.link,
-                        "_blank"
-                    );
+                `<img
+                    src="${product.imagem}"
+                    alt="${escapeHTML(product.nome)}"
+                >`
+
+                :
+
+                `<span
+                    style="font-size:55px"
+                >
+                    🛍️
+                </span>`;
+
+
+            card.innerHTML = `
+
+                <div
+                    class="card-image"
+                >
+
+                    ${image}
+
+                </div>
+
+
+                <div
+                    class="card-name"
+                >
+
+                    ${escapeHTML(
+                        product.nome
+                    )}
+
+                </div>
+
+            `;
+
+
+            card.addEventListener(
+                "click",
+                function(){
+
+                    if(
+                        product.link
+                    ){
+
+                        window.open(
+                            product.link,
+                            "_blank"
+                        );
+
+                    }
 
                 }
-
-            }
-        );
+            );
 
 
-        productsBox.appendChild(card);
+            productsBox.appendChild(
+                card
+            );
 
-    });
+        }
+    );
 
 }
+
 
 
 /* ==========================================
    PESQUISA
 ========================================== */
+
 
 search.addEventListener(
     "input",
@@ -854,504 +1465,140 @@ search.addEventListener(
 );
 
 
+
 /* ==========================================
    PREVIEW DA IMAGEM
 ========================================== */
 
-let selectedImage = "";
-
 
 document
-.getElementById("image")
-.addEventListener("change",function(event){
+    .getElementById(
+        "image"
+    )
+    .addEventListener(
+        "change",
+        function(event){
 
-    const file =
-        event.target.files[0];
-
-
-    if(!file){
-
-        return;
-
-    }
+            const file =
+                event.target.files[0];
 
 
-    const reader =
-        new FileReader();
+            if(
+                !file
+            ){
+
+                return;
+
+            }
 
 
-    reader.onload =
-        function(){
-
-            selectedImage =
-                reader.result;
+            const reader =
+                new FileReader();
 
 
-            document
-            .getElementById("preview")
-            .innerHTML = `
+            reader.onload =
+                function(){
 
-                <img
-                    src="${selectedImage}"
-                >
+                    document
+                        .getElementById(
+                            "preview"
+                        )
+                        .innerHTML = `
 
-            `;
+                            <img
+                                src="${reader.result}"
+                            >
 
-        };
+                        `;
+
+                };
 
 
-    reader.readAsDataURL(file);
+            reader.readAsDataURL(
+                file
+            );
 
-});
+        }
+    );
+
 
 
 /* ==========================================
    ADICIONAR PRODUTO
 ========================================== */
 
+
 document
-.getElementById("addProduct")
-.addEventListener("click",async function(){
-
-    const name =
-        document
-        .getElementById("name")
-        .value
-        .trim();
-
-
-    const link =
-        document
-        .getElementById("link")
-        .value
-        .trim();
-
-
-    const message =
-        document
-        .getElementById("formMessage");
-
-
-    if(!name){
-
-        message.className = "error";
-
-        message.textContent =
-            "Digite o nome do produto.";
-
-        return;
-
-    }
-
-
-    if(!link){
-
-        message.className = "error";
-
-        message.textContent =
-            "Digite o link do produto.";
-
-        return;
-
-    }
-
-
-    if(!selectedImage){
-
-        message.className = "error";
-
-        message.textContent =
-            "Escolha uma imagem.";
-
-        return;
-
-    }
-
-
-    message.className = "success";
-
-    message.textContent =
-        "Adicionando produto...";
-
-
-    const result =
-        await supabaseClient
-        .from("produtos")
-        .insert({
-
-            nome:name,
-
-            imagem:selectedImage,
-
-            link:link
-
-        });
-
-
-    if(result.error){
-
-        console.error(
-            result.error
-        );
-
-        message.className = "error";
-
-        message.textContent =
-            "Erro ao adicionar produto.";
-
-        return;
-
-    }
-
-
-    document
-    .getElementById("name")
-    .value = "";
-
-
-    document
-    .getElementById("link")
-    .value = "";
-
-
-    document
-    .getElementById("image")
-    .value = "";
-
-
-    document
-    .getElementById("preview")
-    .innerHTML = "";
-
-
-    selectedImage = "";
-
-
-    message.className = "success";
-
-    message.textContent =
-        "Produto adicionado com sucesso!";
-
-
-    loadProducts();
-
-    loadAdminProducts();
-
-});
-
-
-/* ==========================================
-   LISTA DO DONO
-========================================== */
-
-async function loadAdminProducts(){
-
-    const list =
-        document
-        .getElementById("adminList");
-
-
-    list.innerHTML =
-        "Carregando...";
-
-
-    const result =
-        await supabaseClient
-        .from("produtos")
-        .select("*")
-        .order(
-            "criado_em",
-            {
-                ascending:false
-            }
-        );
-
-
-    if(result.error){
-
-        list.innerHTML =
-            "Erro ao carregar produtos.";
-
-        console.error(
-            result.error
-        );
-
-        return;
-
-    }
-
-
-    list.innerHTML = "";
-
-
-    if(!result.data.length){
-
-        list.innerHTML = `
-
-            <div class="empty">
-
-                Nenhum produto cadastrado.
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    result.data.forEach(function(product){
-
-        const item =
-            document.createElement("div");
-
-
-        item.className =
-            "admin-item";
-
-
-        item.innerHTML = `
-
-            ${
-                product.imagem
-
-                ?
-
-                `<img
-                    class="admin-thumb"
-                    src="${product.imagem}"
-                >`
-
-                :
-
-                `<div class="admin-thumb">
-                    🛍️
-                </div>`
-            }
-
-
-            <div class="admin-name">
-
-                ${escapeHTML(product.nome)}
-
-            </div>
-
-
-            <button
-                class="delete"
-            >
-
-                Deletar
-
-            </button>
-
-        `;
-
-
-        item
-        .querySelector(".delete")
-        .addEventListener(
-            "click",
-            function(){
-
-                deleteProduct(
-                    product.id
-                );
-
-            }
-        );
-
-
-        list.appendChild(item);
-
-    });
-
-}
-
-
-/* ==========================================
-   DELETAR
-========================================== */
-
-async function deleteProduct(id){
-
-    const ok =
-        confirm(
-            "Deseja deletar este produto?"
-        );
-
-
-    if(!ok){
-
-        return;
-
-    }
-
-
-    const result =
-        await supabaseClient
-        .from("produtos")
-        .delete()
-        .eq("id",id);
-
-
-    if(result.error){
-
-        alert(
-            "Erro ao deletar produto."
-        );
-
-        console.error(
-            result.error
-        );
-
-        return;
-
-    }
-
-
-    loadProducts();
-
-    loadAdminProducts();
-
-}
-
-
-/* ==========================================
-   REALTIME
-========================================== */
-
-supabaseClient
-.channel("produtos-realtime")
-.on(
-    "postgres_changes",
-    {
-        event:"*",
-        schema:"public",
-        table:"produtos"
-    },
-    function(){
-
-        loadProducts();
-
-        loadAdminProducts();
-
-    }
-)
-.subscribe();
-
-
-/* ==========================================
-   VISITANTE
-========================================== */
-
-async function registerVisitor(){
-
-    const visitorId =
-        localStorage.getItem(
-            "visitor_id"
-        );
-
-
-    if(visitorId){
-
-        return;
-
-    }
-
-
-    const id =
-        crypto.randomUUID();
-
-
-    localStorage.setItem(
-        "visitor_id",
-        id
-    );
-
-
-    const result =
-        await supabaseClient
-        .from("visitas")
-        .insert({
-
-            visitante_id:id
-
-        });
-
-
-    if(result.error){
-
-        console.error(
-            result.error
-        );
-
-    }
-
-}
-
-
-/* ==========================================
-   TOTAL DE VISITANTES
-========================================== */
-
-async function loadVisitors(){
-
-    const result =
-        await supabaseClient
-        .from("visitas")
-        .select(
-            "*",
-            {
-                count:"exact",
-                head:true
-            }
-        );
-
-
-    if(result.error){
-
-        console.error(
-            result.error
-        );
-
-        return;
-
-    }
-
-
-    document
     .getElementById(
-        "visitorTotal"
+        "addProduct"
     )
-    .textContent =
-        Number(
-            result.count || 0
-        ).toLocaleString("pt-BR");
+    .addEventListener(
+        "click",
+        async function(){
 
-}
-
-
-/* ==========================================
-   ATUALIZAÇÃO DO CONTADOR
-========================================== */
-
-setInterval(
-    loadVisitors,
-    5000
-);
+            const name =
+                document
+                    .getElementById(
+                        "name"
+                    )
+                    .value
+                    .trim();
 
 
-/* ==========================================
-   INICIAR SITE
-========================================== */
+            const link =
+                document
+                    .getElementById(
+                        "link"
+                    )
+                    .value
+                    .trim();
 
-registerVisitor();
 
-loadProducts();
+            const file =
+                document
+                    .getElementById(
+                        "image"
+                    )
+                    .files[0];
 
-</script>
 
-</body>
-        </html>
+            const message =
+                document
+                    .getElementById(
+                        "formMessage"
+                    );
+
+
+            if(
+                !name
+            ){
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "Digite o nome do produto.";
+
+                return;
+
+            }
+
+
+            if(
+                !link
+            ){
+
+                message.className =
+                    "error";
+
+                message.textContent =
+                    "Digite o link do produto.";
+
+                return;
+
+            }
+
+
+            if(
+                !file
+ 

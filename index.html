@@ -1,29 +1,61 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Todos os Produtos dos Videos</title>
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+    Todos os Produtos dos Videos
+</title>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <style>
+
 :root{
+
     --orange:#f4511e;
     --orange2:#ff7a00;
+
     --bg:#fff8f3;
+
     --text:#222;
-    --muted:#777;
+
 }
+
 
 *{
+
     box-sizing:border-box;
+
 }
 
+
 body{
+
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:var(--bg);
-    color:var(--text);
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background:
+        var(--bg);
+
+    color:
+        var(--text);
+
 }
 
 
@@ -31,28 +63,40 @@ body{
    CABEÇALHO
 ========================= */
 
+
 header{
-    background:linear-gradient(
-        135deg,
-        #f4511e,
-        #ff7a00
-    );
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            var(--orange2)
+        );
 
     color:white;
 
-    padding:25px 16px;
+    padding:
+        28px 16px;
 
     box-shadow:
-        0 4px 18px #0002;
+        0 4px 20px #0002;
+
 }
+
 
 .site-title{
+
     text-align:center;
+
     cursor:pointer;
+
     user-select:none;
+
 }
 
+
 .site-title h1{
+
     margin:0;
 
     font-size:
@@ -63,13 +107,18 @@ header{
         );
 
     font-weight:950;
+
+    line-height:1.1;
+
 }
 
+
 .site-title p{
-    max-width:800px;
+
+    max-width:850px;
 
     margin:
-        10px auto 0;
+        12px auto 0;
 
     font-size:
         clamp(
@@ -78,25 +127,34 @@ header{
             15px
         );
 
-    line-height:1.4;
+    line-height:1.45;
 
     font-weight:600;
+
 }
 
 
 /* =========================
-   CONTEÚDO
+   MAIN
 ========================= */
 
+
 main{
+
     max-width:1100px;
 
     margin:auto;
 
     padding:
-        25px
-        16px
-        60px;
+        25px 16px 60px;
+
+}
+
+
+.hidden{
+
+    display:none !important;
+
 }
 
 
@@ -104,46 +162,55 @@ main{
    PESQUISA
 ========================= */
 
+
 .search-area{
+
     max-width:700px;
 
     margin:
         0 auto 25px;
 
     position:relative;
+
 }
 
+
 .search{
+
     width:100%;
 
-    height:52px;
-
-    border:
-        2px solid
-        #eee;
-
-    border-radius:16px;
+    height:54px;
 
     padding:
         0 48px;
 
-    background:white;
+    border:
+        2px solid #eee;
 
-    font-size:16px;
+    border-radius:16px;
+
+    background:white;
 
     outline:none;
 
+    font-size:16px;
+
     box-shadow:
-        0 5px 20px
-        #0000000c;
+        0 5px 20px #0000000c;
+
 }
+
 
 .search:focus{
+
     border-color:
         var(--orange);
+
 }
 
+
 .search-icon{
+
     position:absolute;
 
     left:17px;
@@ -154,9 +221,12 @@ main{
         translateY(-50%);
 
     font-size:20px;
+
 }
 
+
 .clear{
+
     position:absolute;
 
     right:10px;
@@ -166,17 +236,20 @@ main{
     transform:
         translateY(-50%);
 
+    width:34px;
+
+    height:34px;
+
     border:0;
 
-    width:32px;
-
-    height:32px;
-
     border-radius:50%;
+
+    background:#eee;
 
     cursor:pointer;
 
     display:none;
+
 }
 
 
@@ -184,7 +257,9 @@ main{
    PRODUTOS
 ========================= */
 
+
 .grid{
+
     display:grid;
 
     grid-template-columns:
@@ -197,9 +272,12 @@ main{
         );
 
     gap:16px;
+
 }
 
+
 .card{
+
     background:white;
 
     border-radius:18px;
@@ -207,25 +285,31 @@ main{
     overflow:hidden;
 
     border:
-        1px solid
-        #eee;
+        1px solid #eee;
 
     box-shadow:
-        0 5px 20px
-        #0000000c;
+        0 5px 20px #0000000c;
 
     cursor:pointer;
 
     transition:.2s;
+
 }
+
 
 .card:hover{
+
     transform:
-        translateY(-3px);
+        translateY(-4px);
+
 }
 
+
 .product-image{
+
     height:230px;
+
+    padding:8px;
 
     display:flex;
 
@@ -233,84 +317,107 @@ main{
 
     justify-content:center;
 
-    background:#fff;
+    background:white;
 
-    padding:8px;
 }
 
+
 .product-image img{
+
     width:100%;
 
     height:100%;
 
     object-fit:contain;
+
 }
+
 
 .product-info{
+
     padding:15px;
+
 }
 
+
 .product-name{
+
     font-weight:800;
 
     font-size:15px;
 
     line-height:1.4;
+
 }
 
 
 /* =========================
-   ABA SENHA / DONO
+   PAINEL
 ========================= */
 
+
 .panel{
+
     max-width:700px;
 
     margin:auto;
+
+    padding:25px;
 
     background:white;
 
     border-radius:20px;
 
-    padding:25px;
-
     box-shadow:
-        0 8px 30px
-        #0000000c;
+        0 8px 30px #0000000d;
+
 }
+
 
 .panel h2{
+
     margin-top:0;
+
 }
 
+
 label{
+
     display:block;
 
     margin:
-        16px 0 7px;
+        17px 0 7px;
 
     font-size:14px;
 
     font-weight:800;
+
 }
 
+
 input{
+
     width:100%;
 
     padding:14px;
 
     border:
-        1px solid
-        #ddd;
+        1px solid #ddd;
 
     border-radius:12px;
 
     outline:none;
+
+    font-size:15px;
+
 }
 
+
 input:focus{
+
     border-color:
         var(--orange);
+
 }
 
 
@@ -318,10 +425,17 @@ input:focus{
    BOTÕES
 ========================= */
 
+
 .btn{
+
     margin-top:18px;
 
     border:0;
+
+    padding:
+        13px 20px;
+
+    border-radius:12px;
 
     background:
         linear-gradient(
@@ -332,28 +446,24 @@ input:focus{
 
     color:white;
 
-    padding:
-        13px
-        20px;
-
-    border-radius:12px;
-
     font-weight:900;
 
     cursor:pointer;
+
 }
+
 
 .btn:hover{
+
     opacity:.92;
+
 }
 
 
-/* BOTÃO VOLTAR */
-
 .back{
+
     border:
-        1px solid
-        #ffc7b3;
+        1px solid #ffc8b4;
 
     background:white;
 
@@ -361,8 +471,7 @@ input:focus{
         var(--orange);
 
     padding:
-        10px
-        16px;
+        11px 16px;
 
     border-radius:12px;
 
@@ -371,55 +480,70 @@ input:focus{
     cursor:pointer;
 
     margin-bottom:20px;
+
 }
 
+
 .back:hover{
-    background:#fff4ee;
+
+    background:#fff2eb;
+
 }
 
 
 /* =========================
-   PAINEL DE VISITANTES
+   VISITANTES
 ========================= */
 
+
 .visitor-panel{
+
+    max-width:700px;
+
     margin:
-        0 0 25px;
+        0 auto 25px;
+
+    padding:22px;
 
     background:white;
 
     border:
-        1px solid
-        #ffd9ca;
+        1px solid #ffd8ca;
 
     border-radius:18px;
-
-    padding:22px;
 
     text-align:center;
 
     box-shadow:
-        0 7px 25px
-        #0000000b;
+        0 7px 25px #0000000b;
+
 }
 
+
 .visitor-number{
-    font-size:42px;
+
+    font-size:44px;
+
+    line-height:1;
 
     font-weight:950;
 
     color:
         var(--orange);
+
 }
 
+
 .visitor-text{
-    margin-top:6px;
+
+    margin-top:8px;
 
     color:#666;
 
     font-size:14px;
 
     font-weight:700;
+
 }
 
 
@@ -427,46 +551,56 @@ input:focus{
    UPLOAD
 ========================= */
 
+
 .upload{
+
     display:block;
-
-    border:
-        2px dashed
-        #ffc5ad;
-
-    border-radius:14px;
 
     padding:25px;
 
     text-align:center;
 
+    border:
+        2px dashed #ffc4ad;
+
+    border-radius:14px;
+
     color:#777;
 
     cursor:pointer;
+
 }
 
+
 .upload strong{
+
     display:block;
 
     color:
         var(--orange);
 
     margin-bottom:6px;
+
 }
 
 
 /* =========================
-   LISTA DONO
+   ADMIN
 ========================= */
 
+
 .admin-products{
+
     max-width:700px;
 
     margin:
         30px auto;
+
 }
 
+
 .admin-item{
+
     display:flex;
 
     align-items:center;
@@ -482,11 +616,13 @@ input:focus{
     margin-bottom:10px;
 
     box-shadow:
-        0 4px 15px
-        #00000008;
+        0 4px 15px #00000008;
+
 }
 
+
 .admin-thumb{
+
     width:60px;
 
     height:60px;
@@ -496,15 +632,21 @@ input:focus{
     border-radius:10px;
 
     background:#f5f5f5;
+
 }
 
+
 .admin-name{
+
     flex:1;
 
     font-weight:800;
+
 }
 
+
 .delete{
+
     border:0;
 
     background:#fff0ed;
@@ -512,75 +654,92 @@ input:focus{
     color:#d32f2f;
 
     padding:
-        9px
-        12px;
+        9px 12px;
 
     border-radius:10px;
 
     font-weight:800;
 
     cursor:pointer;
+
 }
 
+
 .error{
+
     color:#d32f2f;
 
     font-size:13px;
 
     margin-top:10px;
+
 }
 
-.hidden{
-    display:none;
-}
 
 .empty{
+
+    grid-column:1/-1;
+
     text-align:center;
 
-    padding:30px;
+    padding:35px;
 
     color:#777;
+
 }
 
 
 /* =========================
-   CELULAR
+   RESPONSIVO
 ========================= */
+
 
 @media(max-width:600px){
 
     .grid{
+
         grid-template-columns:
             repeat(
                 2,
-                minmax(
-                    0,
-                    1fr
-                )
+                minmax(0,1fr)
             );
 
         gap:10px;
+
     }
+
 
     .product-image{
+
         height:180px;
+
     }
+
 
     .product-info{
+
         padding:11px;
+
     }
+
 
     .product-name{
+
         font-size:13px;
+
     }
 
+
     .site-title h1{
+
         font-size:23px;
+
     }
 
 }
 
 </style>
+
 </head>
 
 
@@ -590,6 +749,7 @@ input:focus{
 <!-- =========================
      CABEÇALHO
 ========================= -->
+
 
 <header>
 
@@ -601,6 +761,7 @@ input:focus{
         <h1>
             TODOS OS PRODUTOS DOS VIDEOS
         </h1>
+
 
         <p>
             lembrando que cada produto desse é oficialmente da shoppe ao clicar ira ser direcionado para o produto na shoppe
@@ -616,16 +777,22 @@ input:focus{
      ABA PRINCIPAL
 ========================= -->
 
-<main id="homePage">
+
+<main
+    id="homePage"
+>
 
 
-    <!-- PESQUISA -->
+    <div
+        class="search-area"
+    >
 
-    <div class="search-area">
-
-        <span class="search-icon">
+        <span
+            class="search-icon"
+        >
             🔎
         </span>
+
 
         <input
             class="search"
@@ -633,6 +800,7 @@ input:focus{
             type="search"
             placeholder="Pesquisar produto..."
         >
+
 
         <button
             class="clear"
@@ -658,26 +826,33 @@ input:focus{
      ABA SENHA
 ========================= -->
 
+
 <main
     id="passwordPage"
     class="hidden"
 >
 
-    <div class="panel">
+
+    <div
+        class="panel"
+    >
 
         <h2>
             ABA SENHA
         </h2>
 
+
         <label>
             Digite a senha:
         </label>
+
 
         <input
             id="password"
             type="password"
             placeholder="Digite a senha"
         >
+
 
         <button
             class="btn"
@@ -686,12 +861,14 @@ input:focus{
             Confirma
         </button>
 
+
         <div
             class="error"
             id="passwordError"
         ></div>
 
     </div>
+
 
 </main>
 
@@ -701,13 +878,12 @@ input:focus{
      ABA DONO
 ========================= -->
 
+
 <main
     id="ownerPage"
     class="hidden"
 >
 
-
-    <!-- BOTÃO VOLTAR -->
 
     <button
         class="back"
@@ -720,9 +896,12 @@ input:focus{
 
 
 
-    <!-- PAINEL DE VISITANTES -->
+    <!-- TOTAL DE VISITANTES -->
 
-    <div class="visitor-panel">
+
+    <div
+        class="visitor-panel"
+    >
 
         <div
             class="visitor-number"
@@ -731,7 +910,10 @@ input:focus{
             0
         </div>
 
-        <div class="visitor-text">
+
+        <div
+            class="visitor-text"
+        >
 
             pessoas entraram no site ao total
 
@@ -741,9 +923,12 @@ input:focus{
 
 
 
-    <!-- CADASTRO -->
+    <!-- FORMULÁRIO -->
 
-    <div class="panel">
+
+    <div
+        class="panel"
+    >
 
         <h2>
             adicione um produto
@@ -790,6 +975,7 @@ input:focus{
 
         <input
             id="name"
+            type="text"
             placeholder="Nome do produto"
         >
 
@@ -825,7 +1011,8 @@ input:focus{
 
 
 
-    <!-- TODOS OS PRODUTOS -->
+    <!-- PRODUTOS DO DONO -->
+
 
     <section
         class="admin-products"
@@ -834,6 +1021,7 @@ input:focus{
         <h2>
             TODOS OS PRODUTOS
         </h2>
+
 
         <div
             id="adminList"
@@ -849,37 +1037,53 @@ input:focus{
 <script>
 
 
-/* =========================
-   DADOS
-========================= */
-
-let products =
-    JSON.parse(
-        localStorage.getItem(
-            "products"
-        )
-    ) || [];
+/* =====================================================
+   SUPABASE
+===================================================== */
 
 
+/*
+    COLE AQUI SUA PUBLISHABLE KEY
+*/
 
-/* =========================
+const SUPABASE_URL =
+    "https://nndwzyikpibdxxzwghzm.supabase.co";
+
+
+const SUPABASE_KEY =
+    "COLE_SUA_PUBLISHABLE_KEY_AQUI";
+
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+
+
+
+/* =====================================================
    ELEMENTOS
-========================= */
+===================================================== */
+
 
 const home =
     document.getElementById(
         "homePage"
     );
 
+
 const passwordPage =
     document.getElementById(
         "passwordPage"
     );
 
+
 const owner =
     document.getElementById(
         "ownerPage"
     );
+
 
 const productsBox =
     document.getElementById(
@@ -888,9 +1092,10 @@ const productsBox =
 
 
 
-/* =========================
+/* =====================================================
    NAVEGAÇÃO
-========================= */
+===================================================== */
+
 
 function show(page){
 
@@ -915,9 +1120,10 @@ function show(page){
 
 
 
-/* =========================
+/* =====================================================
    5 CLIQUES NO TÍTULO
-========================= */
+===================================================== */
+
 
 let clicks = 0;
 
@@ -934,14 +1140,18 @@ document
 
             clicks++;
 
+
             clearTimeout(
                 clickTimer
             );
 
+
             clickTimer =
                 setTimeout(
                     () => {
+
                         clicks = 0;
+
                     },
                     1500
                 );
@@ -951,9 +1161,11 @@ document
 
                 clicks = 0;
 
+
                 show(
                     passwordPage
                 );
+
 
                 document
                     .getElementById(
@@ -968,9 +1180,10 @@ document
 
 
 
-/* =========================
+/* =====================================================
    SENHA
-========================= */
+===================================================== */
+
 
 document
     .getElementById(
@@ -988,7 +1201,10 @@ document
                     .value;
 
 
-            if(password === "000111"){
+            if(
+                password ===
+                "000111"
+            ){
 
                 document
                     .getElementById(
@@ -997,11 +1213,14 @@ document
                     .textContent = "";
 
 
-                show(owner);
+                show(
+                    owner
+                );
+
 
                 renderAdmin();
 
-                renderVisitors();
+                loadVisitorTotal();
 
             }
 
@@ -1021,9 +1240,10 @@ document
 
 
 
-/* =========================
-   BOTÃO VOLTAR
-========================= */
+/* =====================================================
+   VOLTAR
+===================================================== */
+
 
 document
     .getElementById(
@@ -1033,43 +1253,96 @@ document
         "click",
         () => {
 
-            show(home);
+            show(
+                home
+            );
 
         }
     );
 
 
 
-/* =========================
-   SALVAR
-========================= */
+/* =====================================================
+   CARREGAR PRODUTOS DO SUPABASE
+===================================================== */
 
-function saveProducts(){
 
-    localStorage.setItem(
-        "products",
-        JSON.stringify(
-            products
+async function loadProducts(){
+
+    const {
+        data,
+        error
+    } = await supabaseClient
+
+        .from(
+            "produtos"
         )
+
+        .select(
+            "*"
+        )
+
+        .order(
+            "criado_em",
+            {
+                ascending:false
+            }
+        );
+
+
+    if(error){
+
+        console.error(
+            error
+        );
+
+
+        productsBox.innerHTML = `
+
+            <div class="empty">
+
+                Erro ao carregar os produtos.
+
+                <br><br>
+
+                Verifique a configuração
+                do Supabase.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    renderProducts(
+        data || []
     );
 
 }
 
 
 
-/* =========================
-   PRODUTOS
-========================= */
+/* =====================================================
+   MOSTRAR PRODUTOS
+===================================================== */
+
 
 function renderProducts(
-    searchText = ""
+    products
 ){
 
     productsBox.innerHTML = "";
 
 
     const search =
-        searchText
+        document
+            .getElementById(
+                "search"
+            )
+            .value
             .trim()
             .toLowerCase();
 
@@ -1077,20 +1350,25 @@ function renderProducts(
     const filtered =
         products.filter(
             product =>
-                product.name
-                    .toLowerCase()
-                    .includes(search)
+
+                String(
+                    product.nome || ""
+                )
+                .toLowerCase()
+                .includes(
+                    search
+                )
+
         );
 
 
-    if(filtered.length === 0){
+    if(
+        filtered.length === 0
+    ){
 
         productsBox.innerHTML = `
 
-            <div
-                class="empty"
-                style="grid-column:1/-1"
-            >
+            <div class="empty">
 
                 🔎
 
@@ -1128,19 +1406,21 @@ function renderProducts(
                 >
 
                     ${
-                        product.image
+                        product.imagem
 
                         ?
 
                         `<img
-                            src="${product.image}"
-                            alt="${product.name}"
+                            src="${product.imagem}"
+                            alt="${escapeHtml(product.nome)}"
                         >`
 
                         :
 
                         `<span
-                            style="font-size:50px"
+                            style="
+                                font-size:55px
+                            "
                         >
                             🛍️
                         </span>`
@@ -1157,7 +1437,9 @@ function renderProducts(
                         class="product-name"
                     >
 
-                        ${product.name}
+                        ${escapeHtml(
+                            product.nome
+                        )}
 
                     </div>
 
@@ -1166,20 +1448,23 @@ function renderProducts(
             `;
 
 
-            card.onclick = () => {
+            card.addEventListener(
+                "click",
+                () => {
 
-                if(
-                    product.link
-                ){
+                    if(
+                        product.link
+                    ){
 
-                    window.open(
-                        product.link,
-                        "_blank"
-                    );
+                        window.open(
+                            product.link,
+                            "_blank"
+                        );
+
+                    }
 
                 }
-
-            };
+            );
 
 
             productsBox.appendChild(
@@ -1193,9 +1478,10 @@ function renderProducts(
 
 
 
-/* =========================
+/* =====================================================
    PESQUISA
-========================= */
+===================================================== */
+
 
 document
     .getElementById(
@@ -1203,15 +1489,17 @@ document
     )
     .addEventListener(
         "input",
-        event => {
+        () => {
+
+            loadProducts();
+
 
             const value =
-                event.target.value;
-
-
-            renderProducts(
-                value
-            );
+                document
+                    .getElementById(
+                        "search"
+                    )
+                    .value;
 
 
             document
@@ -1227,8 +1515,6 @@ document
     );
 
 
-
-/* LIMPAR */
 
 document
     .getElementById(
@@ -1253,16 +1539,17 @@ document
                 "none";
 
 
-            renderProducts();
+            loadProducts();
 
         }
     );
 
 
 
-/* =========================
-   IMAGEM
-========================= */
+/* =====================================================
+   ESCOLHER IMAGEM
+===================================================== */
+
 
 let selectedImage = "";
 
@@ -1325,9 +1612,10 @@ document
 
 
 
-/* =========================
+/* =====================================================
    ADICIONAR PRODUTO
-========================= */
+===================================================== */
+
 
 document
     .getElementById(
@@ -1335,7 +1623,7 @@ document
     )
     .addEventListener(
         "click",
-        () => {
+        async () => {
 
             const name =
                 document
@@ -1355,13 +1643,19 @@ document
                     .trim();
 
 
-            if(!name || !link){
-
+            const errorBox =
                 document
                     .getElementById(
                         "formError"
-                    )
-                    .textContent =
+                    );
+
+
+            if(
+                !name ||
+                !link
+            ){
+
+                errorBox.textContent =
                     "Preencha o nome e o link.";
 
                 return;
@@ -1369,18 +1663,68 @@ document
             }
 
 
-            products.push({
+            if(
+                !selectedImage
+            ){
 
-                name:name,
+                errorBox.textContent =
+                    "Escolha uma imagem.";
 
-                image:selectedImage,
+                return;
 
-                link:link
-
-            });
+            }
 
 
-            saveProducts();
+            errorBox.textContent =
+                "Adicionando...";
+
+
+            /*
+                OBSERVAÇÃO:
+
+                Nesta primeira versão,
+                a imagem é enviada como
+                texto para o banco.
+
+                Para uma versão definitiva,
+                vamos colocar as imagens
+                no Supabase Storage.
+            */
+
+
+            const {
+                error
+            } =
+                await supabaseClient
+
+                    .from(
+                        "produtos"
+                    )
+
+                    .insert({
+
+                        nome:name,
+
+                        imagem:selectedImage,
+
+                        link:link
+
+                    });
+
+
+            if(error){
+
+                console.error(
+                    error
+                );
+
+
+                errorBox.textContent =
+                    "Erro ao adicionar produto.";
+
+                return;
+
+            }
 
 
             document
@@ -1411,17 +1755,12 @@ document
                 .innerHTML = "";
 
 
-            document
-                .getElementById(
-                    "formError"
-                )
-                .textContent = "";
-
-
             selectedImage = "";
 
 
-            renderProducts();
+            errorBox.textContent =
+                "Produto adicionado!";
+
 
             renderAdmin();
 
@@ -1430,22 +1769,63 @@ document
 
 
 
-/* =========================
-   LISTA DO DONO
-========================= */
+/* =====================================================
+   LISTA DA ABA DONO
+===================================================== */
 
-function renderAdmin(){
+
+async function renderAdmin(){
 
     const list =
-        document.getElementById(
-            "adminList"
-        );
+        document
+            .getElementById(
+                "adminList"
+            );
+
+
+    list.innerHTML =
+        "Carregando...";
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from(
+                "produtos"
+            )
+
+            .select(
+                "*"
+            )
+
+            .order(
+                "criado_em",
+                {
+                    ascending:false
+                }
+            );
+
+
+    if(error){
+
+        list.innerHTML =
+            "Erro ao carregar produtos.";
+
+        return;
+
+    }
 
 
     list.innerHTML = "";
 
 
-    if(products.length === 0){
+    if(
+        !data ||
+        data.length === 0
+    ){
 
         list.innerHTML = `
 
@@ -1462,8 +1842,8 @@ function renderAdmin(){
     }
 
 
-    products.forEach(
-        (product,index) => {
+    data.forEach(
+        product => {
 
             const item =
                 document.createElement(
@@ -1478,13 +1858,13 @@ function renderAdmin(){
             item.innerHTML = `
 
                 ${
-                    product.image
+                    product.imagem
 
                     ?
 
                     `<img
                         class="admin-thumb"
-                        src="${product.image}"
+                        src="${product.imagem}"
                     >`
 
                     :
@@ -1507,7 +1887,9 @@ function renderAdmin(){
                     class="admin-name"
                 >
 
-                    ${product.name}
+                    ${escapeHtml(
+                        product.nome
+                    )}
 
                 </div>
 
@@ -1527,21 +1909,16 @@ function renderAdmin(){
                 .querySelector(
                     ".delete"
                 )
-                .onclick = () => {
+                .addEventListener(
+                    "click",
+                    () => {
 
-                    products.splice(
-                        index,
-                        1
-                    );
+                        deleteProduct(
+                            product.id
+                        );
 
-
-                    saveProducts();
-
-                    renderProducts();
-
-                    renderAdmin();
-
-                };
+                    }
+                );
 
 
             list.appendChild(
@@ -1555,61 +1932,197 @@ function renderAdmin(){
 
 
 
-/* =========================
-   CONTADOR TOTAL DE VISITANTES
-========================= */
-
-/*
-   Esta versão usa o navegador apenas
-   para a prévia.
-
-   Para contar TODOS os visitantes
-   de TODOS os aparelhos de verdade,
-   depois vamos conectar a um banco online.
-*/
-
-let totalVisitors =
-    Number(
-        localStorage.getItem(
-            "totalVisitors"
-        )
-    ) || 0;
+/* =====================================================
+   DELETAR PRODUTO
+===================================================== */
 
 
-if(
-    !sessionStorage.getItem(
-        "thisVisitCounted"
-    )
+async function deleteProduct(
+    id
 ){
 
-    totalVisitors++;
+    if(
+        !confirm(
+            "Deseja deletar este produto?"
+        )
+    ){
+
+        return;
+
+    }
 
 
-    localStorage.setItem(
-        "totalVisitors",
-        totalVisitors
-    );
+    const {
+        error
+    } =
+        await supabaseClient
+
+            .from(
+                "produtos"
+            )
+
+            .delete()
+
+            .eq(
+                "id",
+                id
+            );
 
 
-    sessionStorage.setItem(
-        "thisVisitCounted",
-        "yes"
-    );
+    if(error){
+
+        alert(
+            "Não foi possível deletar."
+        );
+
+        console.error(
+            error
+        );
+
+        return;
+
+    }
+
+
+    loadProducts();
+
+    renderAdmin();
 
 }
 
 
 
-function renderVisitors(){
+/* =====================================================
+   REALTIME
+===================================================== */
 
-    const counter =
-        document.getElementById(
-            "totalVisitors"
+
+supabaseClient
+
+    .channel(
+        "produtos-em-tempo-real"
+    )
+
+    .on(
+
+        "postgres_changes",
+
+        {
+            event:"*",
+
+            schema:"public",
+
+            table:"produtos"
+
+        },
+
+        () => {
+
+            loadProducts();
+
+            renderAdmin();
+
+        }
+
+    )
+
+    .subscribe();
+
+
+
+/* =====================================================
+   CONTADOR DE VISITANTES
+===================================================== */
+
+
+/*
+    Para o contador total funcionar
+    entre TODOS os aparelhos,
+    precisamos de uma tabela própria.
+
+    Crie essa tabela no Supabase
+    com o SQL que vou passar abaixo.
+*/
+
+
+async function registerVisit(){
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+
+            .from(
+                "visitas"
+            )
+
+            .insert({
+
+                visitante:
+                    crypto.randomUUID()
+
+            });
+
+
+    if(error){
+
+        console.error(
+            "Erro visitante:",
+            error
         );
 
+    }
 
-    counter.textContent =
-        totalVisitors.toLocaleString(
+}
+
+
+
+/* =====================================================
+   CARREGAR TOTAL DE VISITANTES
+===================================================== */
+
+
+async function loadVisitorTotal(){
+
+    const {
+        count,
+        error
+    } =
+        await supabaseClient
+
+            .from(
+                "visitas"
+            )
+
+            .select(
+                "*",
+                {
+                    count:"exact",
+                    head:true
+                }
+            );
+
+
+    if(error){
+
+        console.error(
+            error
+        );
+
+        return;
+
+    }
+
+
+    document
+        .getElementById(
+            "totalVisitors"
+        )
+        .textContent =
+        Number(
+            count || 0
+        ).toLocaleString(
             "pt-BR"
         );
 
@@ -1617,15 +2130,60 @@ function renderVisitors(){
 
 
 
-/* =========================
-   INICIAR
-========================= */
+/* =====================================================
+   SEGURANÇA DE TEXTO
+===================================================== */
 
-renderProducts();
 
-renderVisitors();
+function escapeHtml(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+
+    .replace(
+        /</g,
+        "&lt;"
+    )
+
+    .replace(
+        />/g,
+        "&gt;"
+    )
+
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+
+/* =====================================================
+   INICIALIZAÇÃO
+===================================================== */
+
+
+registerVisit();
+
+loadProducts();
 
 </script>
 
+
 </body>
+
 </html>

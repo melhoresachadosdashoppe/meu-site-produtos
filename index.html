@@ -1,767 +1,314 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>
-    Todos os Produtos dos Videos
-</title>
-
-
-<!-- SUPABASE -->
+<title>Todos os Produtos dos Videos</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
 <style>
-
-:root{
-
-    --orange:#f4511e;
-    --orange2:#ff7a00;
-
-    --bg:#fff8f3;
-
-    --text:#222;
-
-}
-
-
 *{
-
     box-sizing:border-box;
-
 }
-
 
 body{
-
     margin:0;
-
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background:
-        var(--bg);
-
-    color:
-        var(--text);
-
+    font-family:Arial,Helvetica,sans-serif;
+    background:#fff7f2;
+    color:#222;
 }
-
-
-/* =========================
-   CABEÇALHO
-========================= */
-
 
 header{
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--orange),
-            var(--orange2)
-        );
-
+    background:linear-gradient(135deg,#ee4d2d,#ff7300);
     color:white;
-
-    padding:
-        28px 16px;
-
-    box-shadow:
-        0 4px 20px #0002;
-
+    padding:28px 15px;
+    box-shadow:0 4px 20px #0002;
 }
 
-
-.site-title{
-
+.title{
     text-align:center;
-
     cursor:pointer;
-
     user-select:none;
-
 }
 
-
-.site-title h1{
-
+.title h1{
     margin:0;
-
-    font-size:
-        clamp(
-            24px,
-            6vw,
-            38px
-        );
-
-    font-weight:950;
-
-    line-height:1.1;
-
+    font-size:clamp(25px,6vw,40px);
+    font-weight:900;
 }
 
-
-.site-title p{
-
+.title p{
     max-width:850px;
-
-    margin:
-        12px auto 0;
-
-    font-size:
-        clamp(
-            12px,
-            2.5vw,
-            15px
-        );
-
-    line-height:1.45;
-
-    font-weight:600;
-
+    margin:12px auto 0;
+    font-size:14px;
+    font-weight:bold;
+    line-height:1.5;
 }
-
-
-/* =========================
-   MAIN
-========================= */
-
 
 main{
-
     max-width:1100px;
-
     margin:auto;
-
-    padding:
-        25px 16px 60px;
-
+    padding:25px 15px 60px;
 }
-
 
 .hidden{
-
-    display:none !important;
-
+    display:none!important;
 }
 
-
-/* =========================
-   PESQUISA
-========================= */
-
-
-.search-area{
-
+.search-box{
     max-width:700px;
-
-    margin:
-        0 auto 25px;
-
-    position:relative;
-
+    margin:0 auto 25px;
 }
 
-
-.search{
-
+.search-box input{
     width:100%;
-
-    height:54px;
-
-    padding:
-        0 48px;
-
-    border:
-        2px solid #eee;
-
-    border-radius:16px;
-
-    background:white;
-
-    outline:none;
-
+    height:52px;
+    border:2px solid #eee;
+    border-radius:15px;
+    padding:0 18px;
     font-size:16px;
-
-    box-shadow:
-        0 5px 20px #0000000c;
-
+    outline:none;
+    background:white;
 }
 
-
-.search:focus{
-
-    border-color:
-        var(--orange);
-
+.search-box input:focus{
+    border-color:#ee4d2d;
 }
 
-
-.search-icon{
-
-    position:absolute;
-
-    left:17px;
-
-    top:50%;
-
-    transform:
-        translateY(-50%);
-
-    font-size:20px;
-
-}
-
-
-.clear{
-
-    position:absolute;
-
-    right:10px;
-
-    top:50%;
-
-    transform:
-        translateY(-50%);
-
-    width:34px;
-
-    height:34px;
-
-    border:0;
-
-    border-radius:50%;
-
-    background:#eee;
-
-    cursor:pointer;
-
-    display:none;
-
-}
-
-
-/* =========================
-   PRODUTOS
-========================= */
-
-
-.grid{
-
+.products{
     display:grid;
-
-    grid-template-columns:
-        repeat(
-            auto-fill,
-            minmax(
-                220px,
-                1fr
-            )
-        );
-
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
     gap:16px;
-
 }
-
 
 .card{
-
     background:white;
-
     border-radius:18px;
-
     overflow:hidden;
-
-    border:
-        1px solid #eee;
-
-    box-shadow:
-        0 5px 20px #0000000c;
-
+    box-shadow:0 5px 20px #00000012;
     cursor:pointer;
-
     transition:.2s;
-
 }
-
 
 .card:hover{
-
-    transform:
-        translateY(-4px);
-
+    transform:translateY(-4px);
 }
 
-
-.product-image{
-
+.card-image{
     height:230px;
-
     padding:8px;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     background:white;
-
 }
 
-
-.product-image img{
-
+.card-image img{
     width:100%;
-
     height:100%;
-
     object-fit:contain;
-
 }
 
-
-.product-info{
-
+.card-name{
     padding:15px;
-
-}
-
-
-.product-name{
-
-    font-weight:800;
-
     font-size:15px;
-
-    line-height:1.4;
-
+    font-weight:800;
 }
-
-
-/* =========================
-   PAINEL
-========================= */
-
 
 .panel{
-
     max-width:700px;
-
     margin:auto;
-
     padding:25px;
-
     background:white;
-
     border-radius:20px;
-
-    box-shadow:
-        0 8px 30px #0000000d;
-
+    box-shadow:0 8px 30px #00000010;
 }
-
 
 .panel h2{
-
     margin-top:0;
-
 }
-
 
 label{
-
     display:block;
-
-    margin:
-        17px 0 7px;
-
+    margin:17px 0 7px;
     font-size:14px;
-
-    font-weight:800;
-
+    font-weight:bold;
 }
-
 
 input{
-
     width:100%;
-
     padding:14px;
-
-    border:
-        1px solid #ddd;
-
+    border:1px solid #ddd;
     border-radius:12px;
-
     outline:none;
-
     font-size:15px;
-
 }
 
-
-input:focus{
-
-    border-color:
-        var(--orange);
-
+button{
+    cursor:pointer;
 }
-
-
-/* =========================
-   BOTÕES
-========================= */
-
 
 .btn{
-
     margin-top:18px;
-
     border:0;
-
-    padding:
-        13px 20px;
-
+    padding:14px 20px;
     border-radius:12px;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--orange),
-            var(--orange2)
-        );
-
+    background:linear-gradient(135deg,#ee4d2d,#ff7300);
     color:white;
-
     font-weight:900;
-
-    cursor:pointer;
-
 }
-
-
-.btn:hover{
-
-    opacity:.92;
-
-}
-
 
 .back{
-
-    border:
-        1px solid #ffc8b4;
-
+    border:1px solid #ffc8b4;
     background:white;
-
-    color:
-        var(--orange);
-
-    padding:
-        11px 16px;
-
+    color:#ee4d2d;
+    padding:11px 16px;
     border-radius:12px;
-
     font-weight:900;
-
-    cursor:pointer;
-
     margin-bottom:20px;
-
 }
-
-
-.back:hover{
-
-    background:#fff2eb;
-
-}
-
-
-/* =========================
-   VISITANTES
-========================= */
-
-
-.visitor-panel{
-
-    max-width:700px;
-
-    margin:
-        0 auto 25px;
-
-    padding:22px;
-
-    background:white;
-
-    border:
-        1px solid #ffd8ca;
-
-    border-radius:18px;
-
-    text-align:center;
-
-    box-shadow:
-        0 7px 25px #0000000b;
-
-}
-
-
-.visitor-number{
-
-    font-size:44px;
-
-    line-height:1;
-
-    font-weight:950;
-
-    color:
-        var(--orange);
-
-}
-
-
-.visitor-text{
-
-    margin-top:8px;
-
-    color:#666;
-
-    font-size:14px;
-
-    font-weight:700;
-
-}
-
-
-/* =========================
-   UPLOAD
-========================= */
-
 
 .upload{
-
     display:block;
-
     padding:25px;
-
     text-align:center;
-
-    border:
-        2px dashed #ffc4ad;
-
+    border:2px dashed #ffc2ad;
     border-radius:14px;
-
     color:#777;
-
     cursor:pointer;
-
 }
-
 
 .upload strong{
-
     display:block;
-
-    color:
-        var(--orange);
-
+    color:#ee4d2d;
     margin-bottom:6px;
-
 }
 
+.preview{
+    margin-top:12px;
+    text-align:center;
+}
 
-/* =========================
-   ADMIN
-========================= */
+.preview img{
+    width:100%;
+    max-height:230px;
+    object-fit:contain;
+    border-radius:14px;
+}
 
-
-.admin-products{
-
+.visitors{
     max-width:700px;
-
-    margin:
-        30px auto;
-
+    margin:0 auto 25px;
+    padding:22px;
+    background:white;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 7px 25px #0000000d;
 }
 
+.visitor-number{
+    font-size:45px;
+    font-weight:900;
+    color:#ee4d2d;
+}
+
+.visitor-text{
+    color:#666;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.admin-list{
+    max-width:700px;
+    margin:30px auto;
+}
 
 .admin-item{
-
     display:flex;
-
     align-items:center;
-
     gap:12px;
-
     background:white;
-
     padding:12px;
-
     border-radius:14px;
-
     margin-bottom:10px;
-
-    box-shadow:
-        0 4px 15px #00000008;
-
+    box-shadow:0 4px 15px #00000008;
 }
-
 
 .admin-thumb{
-
     width:60px;
-
     height:60px;
-
     object-fit:contain;
-
     border-radius:10px;
-
     background:#f5f5f5;
-
 }
-
 
 .admin-name{
-
     flex:1;
-
-    font-weight:800;
-
+    font-weight:bold;
 }
-
 
 .delete{
-
     border:0;
-
     background:#fff0ed;
-
     color:#d32f2f;
-
-    padding:
-        9px 12px;
-
+    padding:9px 12px;
     border-radius:10px;
-
-    font-weight:800;
-
-    cursor:pointer;
-
+    font-weight:bold;
 }
-
 
 .error{
-
     color:#d32f2f;
-
-    font-size:13px;
-
     margin-top:10px;
-
+    font-size:14px;
 }
 
+.success{
+    color:#16803c;
+    margin-top:10px;
+    font-size:14px;
+}
 
 .empty{
-
     grid-column:1/-1;
-
     text-align:center;
-
-    padding:35px;
-
+    padding:40px;
     color:#777;
-
 }
-
-
-/* =========================
-   RESPONSIVO
-========================= */
-
 
 @media(max-width:600px){
 
-    .grid{
-
-        grid-template-columns:
-            repeat(
-                2,
-                minmax(0,1fr)
-            );
-
+    .products{
+        grid-template-columns:repeat(2,minmax(0,1fr));
         gap:10px;
-
     }
 
-
-    .product-image{
-
+    .card-image{
         height:180px;
-
     }
 
-
-    .product-info{
-
+    .card-name{
         padding:11px;
-
-    }
-
-
-    .product-name{
-
         font-size:13px;
-
     }
 
-
-    .site-title h1{
-
-        font-size:23px;
-
+    .title h1{
+        font-size:24px;
     }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     CABEÇALHO
-========================= -->
-
-
 <header>
 
-    <div
-        class="site-title"
-        id="siteTitle"
-    >
+    <div class="title" id="siteTitle">
 
         <h1>
             TODOS OS PRODUTOS DOS VIDEOS
         </h1>
-
 
         <p>
             lembrando que cada produto desse é oficialmente da shoppe ao clicar ira ser direcionado para o produto na shoppe
@@ -772,80 +319,42 @@ input:focus{
 </header>
 
 
+<!-- ABA PRINCIPAL -->
 
-<!-- =========================
-     ABA PRINCIPAL
-========================= -->
+<main id="homePage">
 
-
-<main
-    id="homePage"
->
-
-
-    <div
-        class="search-area"
-    >
-
-        <span
-            class="search-icon"
-        >
-            🔎
-        </span>
-
+    <div class="search-box">
 
         <input
-            class="search"
             id="search"
             type="search"
-            placeholder="Pesquisar produto..."
+            placeholder="🔎 Pesquisar produto..."
         >
-
-
-        <button
-            class="clear"
-            id="clearSearch"
-        >
-            ×
-        </button>
 
     </div>
 
-
     <div
-        class="grid"
+        class="products"
         id="products"
     ></div>
-
 
 </main>
 
 
-
-<!-- =========================
-     ABA SENHA
-========================= -->
-
+<!-- ABA SENHA -->
 
 <main
     id="passwordPage"
     class="hidden"
 >
 
+    <div class="panel">
 
-    <div
-        class="panel"
-    >
-
-        <h2>
-            ABA SENHA
-        </h2>
-
+        <h2>ABA SENHA</h2>
 
         <label>
             Digite a senha:
         </label>
-
 
         <input
             id="password"
@@ -853,14 +362,12 @@ input:focus{
             placeholder="Digite a senha"
         >
 
-
         <button
             class="btn"
-            id="confirm"
+            id="confirmPassword"
         >
             Confirma
         </button>
-
 
         <div
             class="error"
@@ -869,66 +376,41 @@ input:focus{
 
     </div>
 
-
 </main>
 
 
-
-<!-- =========================
-     ABA DONO
-========================= -->
-
+<!-- ABA DONO -->
 
 <main
     id="ownerPage"
     class="hidden"
 >
 
-
     <button
         class="back"
         id="backButton"
     >
-
         ← Voltar para a ABA principal
-
     </button>
 
 
-
-    <!-- TOTAL DE VISITANTES -->
-
-
-    <div
-        class="visitor-panel"
-    >
+    <div class="visitors">
 
         <div
             class="visitor-number"
-            id="totalVisitors"
+            id="visitorTotal"
         >
             0
         </div>
 
-
-        <div
-            class="visitor-text"
-        >
-
+        <div class="visitor-text">
             pessoas entraram no site ao total
-
         </div>
 
     </div>
 
 
-
-    <!-- FORMULÁRIO -->
-
-
-    <div
-        class="panel"
-    >
+    <div class="panel">
 
         <h2>
             adicione um produto
@@ -939,7 +421,6 @@ input:focus{
             Imagem:
         </label>
 
-
         <label
             class="upload"
             for="image"
@@ -949,11 +430,9 @@ input:focus{
                 📷 Escolher imagem
             </strong>
 
-            Clique aqui para escolher
-            uma foto da galeria
+            Clique aqui para escolher uma foto
 
         </label>
-
 
         <input
             id="image"
@@ -964,6 +443,7 @@ input:focus{
 
 
         <div
+            class="preview"
             id="preview"
         ></div>
 
@@ -971,7 +451,6 @@ input:focus{
         <label>
             Nome:
         </label>
-
 
         <input
             id="name"
@@ -984,7 +463,6 @@ input:focus{
             Link:
         </label>
 
-
         <input
             id="link"
             type="url"
@@ -994,65 +472,43 @@ input:focus{
 
         <button
             class="btn"
-            id="add"
+            id="addProduct"
         >
-
             Adicionar produto
-
         </button>
 
 
         <div
-            class="error"
-            id="formError"
+            id="formMessage"
         ></div>
 
     </div>
 
 
-
-    <!-- PRODUTOS DO DONO -->
-
-
-    <section
-        class="admin-products"
-    >
+    <section class="admin-list">
 
         <h2>
             TODOS OS PRODUTOS
         </h2>
 
-
-        <div
-            id="adminList"
-        ></div>
+        <div id="adminList"></div>
 
     </section>
-
 
 </main>
 
 
-
 <script>
 
-
-/* =====================================================
+/* ==========================================
    SUPABASE
-===================================================== */
-
-
-/*
-    COLE AQUI SUA PUBLISHABLE KEY
-*/
+========================================== */
 
 const SUPABASE_URL =
     "https://nndwzyikpibdxxzwghzm.supabase.co";
 
-
 const SUPABASE_KEY =
-    "COLE_SUA_PUBLISHABLE_KEY_AQUI";
-
+    "sb_publishable_Rl3Kbvn6ygWnhKfNBFadEg_-lia60Qg";
 
 const supabaseClient =
     window.supabase.createClient(
@@ -1061,227 +517,183 @@ const supabaseClient =
     );
 
 
-
-/* =====================================================
+/* ==========================================
    ELEMENTOS
-===================================================== */
+========================================== */
 
-
-const home =
-    document.getElementById(
-        "homePage"
-    );
-
+const homePage =
+    document.getElementById("homePage");
 
 const passwordPage =
-    document.getElementById(
-        "passwordPage"
-    );
+    document.getElementById("passwordPage");
 
-
-const owner =
-    document.getElementById(
-        "ownerPage"
-    );
-
+const ownerPage =
+    document.getElementById("ownerPage");
 
 const productsBox =
-    document.getElementById(
-        "products"
-    );
+    document.getElementById("products");
+
+const search =
+    document.getElementById("search");
 
 
-
-/* =====================================================
+/* ==========================================
    NAVEGAÇÃO
-===================================================== */
+========================================== */
+
+function showPage(page){
+
+    homePage.classList.add("hidden");
+
+    passwordPage.classList.add("hidden");
+
+    ownerPage.classList.add("hidden");
+
+    page.classList.remove("hidden");
+}
 
 
-function show(page){
+/* ==========================================
+   5 CLIQUES NO TÍTULO
+========================================== */
 
-    home.classList.add(
-        "hidden"
-    );
+let titleClicks = 0;
 
-    passwordPage.classList.add(
-        "hidden"
-    );
+let clickTimer = null;
 
-    owner.classList.add(
-        "hidden"
-    );
+document
+.getElementById("siteTitle")
+.addEventListener("click",function(){
+
+    titleClicks++;
+
+    clearTimeout(clickTimer);
+
+    clickTimer = setTimeout(function(){
+
+        titleClicks = 0;
+
+    },1500);
 
 
-    page.classList.remove(
-        "hidden"
-    );
+    if(titleClicks >= 5){
+
+        titleClicks = 0;
+
+        showPage(passwordPage);
+
+        document
+        .getElementById("password")
+        .focus();
+
+    }
+
+});
+
+
+/* ==========================================
+   SENHA
+========================================== */
+
+document
+.getElementById("confirmPassword")
+.addEventListener("click",function(){
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    if(password === "000111"){
+
+        document
+        .getElementById("passwordError")
+        .textContent = "";
+
+        showPage(ownerPage);
+
+        loadAdminProducts();
+
+        loadVisitors();
+
+    }
+
+    else{
+
+        document
+        .getElementById("passwordError")
+        .textContent =
+            "Senha incorreta.";
+
+    }
+
+});
+
+
+/* ==========================================
+   ENTER NA SENHA
+========================================== */
+
+document
+.getElementById("password")
+.addEventListener("keydown",function(event){
+
+    if(event.key === "Enter"){
+
+        document
+        .getElementById("confirmPassword")
+        .click();
+
+    }
+
+});
+
+
+/* ==========================================
+   VOLTAR
+========================================== */
+
+document
+.getElementById("backButton")
+.addEventListener("click",function(){
+
+    showPage(homePage);
+
+});
+
+
+/* ==========================================
+   ESCAPAR TEXTO
+========================================== */
+
+function escapeHTML(text){
+
+    return String(text ?? "")
+
+    .replace(/&/g,"&amp;")
+
+    .replace(/</g,"&lt;")
+
+    .replace(/>/g,"&gt;")
+
+    .replace(/"/g,"&quot;")
+
+    .replace(/'/g,"&#039;");
 
 }
 
 
-
-/* =====================================================
-   5 CLIQUES NO TÍTULO
-===================================================== */
-
-
-let clicks = 0;
-
-let clickTimer;
-
-
-document
-    .getElementById(
-        "siteTitle"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            clicks++;
-
-
-            clearTimeout(
-                clickTimer
-            );
-
-
-            clickTimer =
-                setTimeout(
-                    () => {
-
-                        clicks = 0;
-
-                    },
-                    1500
-                );
-
-
-            if(clicks >= 5){
-
-                clicks = 0;
-
-
-                show(
-                    passwordPage
-                );
-
-
-                document
-                    .getElementById(
-                        "password"
-                    )
-                    .focus();
-
-            }
-
-        }
-    );
-
-
-
-/* =====================================================
-   SENHA
-===================================================== */
-
-
-document
-    .getElementById(
-        "confirm"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            const password =
-                document
-                    .getElementById(
-                        "password"
-                    )
-                    .value;
-
-
-            if(
-                password ===
-                "000111"
-            ){
-
-                document
-                    .getElementById(
-                        "passwordError"
-                    )
-                    .textContent = "";
-
-
-                show(
-                    owner
-                );
-
-
-                renderAdmin();
-
-                loadVisitorTotal();
-
-            }
-
-            else{
-
-                document
-                    .getElementById(
-                        "passwordError"
-                    )
-                    .textContent =
-                    "Senha incorreta.";
-
-            }
-
-        }
-    );
-
-
-
-/* =====================================================
-   VOLTAR
-===================================================== */
-
-
-document
-    .getElementById(
-        "backButton"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            show(
-                home
-            );
-
-        }
-    );
-
-
-
-/* =====================================================
-   CARREGAR PRODUTOS DO SUPABASE
-===================================================== */
-
+/* ==========================================
+   CARREGAR PRODUTOS
+========================================== */
 
 async function loadProducts(){
 
-    const {
-        data,
-        error
-    } = await supabaseClient
-
-        .from(
-            "produtos"
-        )
-
-        .select(
-            "*"
-        )
-
+    const result =
+        await supabaseClient
+        .from("produtos")
+        .select("*")
         .order(
             "criado_em",
             {
@@ -1290,23 +702,17 @@ async function loadProducts(){
         );
 
 
-    if(error){
+    if(result.error){
 
         console.error(
-            error
+            result.error
         );
-
 
         productsBox.innerHTML = `
 
             <div class="empty">
 
                 Erro ao carregar os produtos.
-
-                <br><br>
-
-                Verifique a configuração
-                do Supabase.
 
             </div>
 
@@ -1318,61 +724,44 @@ async function loadProducts(){
 
 
     renderProducts(
-        data || []
+        result.data || []
     );
 
 }
 
 
-
-/* =====================================================
+/* ==========================================
    MOSTRAR PRODUTOS
-===================================================== */
+========================================== */
+
+function renderProducts(products){
+
+    const text =
+        search.value
+        .trim()
+        .toLowerCase();
 
 
-function renderProducts(
-    products
-){
+    const filtered =
+        products.filter(function(product){
+
+            return String(
+                product.nome || ""
+            )
+            .toLowerCase()
+            .includes(text);
+
+        });
+
 
     productsBox.innerHTML = "";
 
 
-    const search =
-        document
-            .getElementById(
-                "search"
-            )
-            .value
-            .trim()
-            .toLowerCase();
-
-
-    const filtered =
-        products.filter(
-            product =>
-
-                String(
-                    product.nome || ""
-                )
-                .toLowerCase()
-                .includes(
-                    search
-                )
-
-        );
-
-
-    if(
-        filtered.length === 0
-    ){
+    if(filtered.length === 0){
 
         productsBox.innerHTML = `
 
             <div class="empty">
-
-                🔎
-
-                <br><br>
 
                 Nenhum produto encontrado.
 
@@ -1385,434 +774,307 @@ function renderProducts(
     }
 
 
+    filtered.forEach(function(product){
 
-    filtered.forEach(
-        product => {
-
-            const card =
-                document.createElement(
-                    "article"
-                );
+        const card =
+            document.createElement("div");
 
 
-            card.className =
-                "card";
+        card.className = "card";
 
 
-            card.innerHTML = `
+        const image =
+            product.imagem
+            ?
 
-                <div
-                    class="product-image"
-                >
+            `<img
+                src="${product.imagem}"
+                alt="${escapeHTML(product.nome)}"
+            >`
 
-                    ${
-                        product.imagem
+            :
 
-                        ?
-
-                        `<img
-                            src="${product.imagem}"
-                            alt="${escapeHtml(product.nome)}"
-                        >`
-
-                        :
-
-                        `<span
-                            style="
-                                font-size:55px
-                            "
-                        >
-                            🛍️
-                        </span>`
-                    }
-
-                </div>
+            `<span style="font-size:55px">
+                🛍️
+            </span>`;
 
 
-                <div
-                    class="product-info"
-                >
+        card.innerHTML = `
 
-                    <div
-                        class="product-name"
-                    >
+            <div class="card-image">
 
-                        ${escapeHtml(
-                            product.nome
-                        )}
+                ${image}
 
-                    </div>
+            </div>
 
-                </div>
+            <div class="card-name">
 
-            `;
+                ${escapeHTML(product.nome)}
+
+            </div>
+
+        `;
 
 
-            card.addEventListener(
-                "click",
-                () => {
+        card.addEventListener(
+            "click",
+            function(){
 
-                    if(
-                        product.link
-                    ){
+                if(product.link){
 
-                        window.open(
-                            product.link,
-                            "_blank"
-                        );
-
-                    }
+                    window.open(
+                        product.link,
+                        "_blank"
+                    );
 
                 }
-            );
+
+            }
+        );
 
 
-            productsBox.appendChild(
-                card
-            );
+        productsBox.appendChild(card);
 
-        }
-    );
+    });
 
 }
 
 
-
-/* =====================================================
+/* ==========================================
    PESQUISA
-===================================================== */
+========================================== */
+
+search.addEventListener(
+    "input",
+    function(){
+
+        loadProducts();
+
+    }
+);
 
 
-document
-    .getElementById(
-        "search"
-    )
-    .addEventListener(
-        "input",
-        () => {
-
-            loadProducts();
-
-
-            const value =
-                document
-                    .getElementById(
-                        "search"
-                    )
-                    .value;
-
-
-            document
-                .getElementById(
-                    "clearSearch"
-                )
-                .style.display =
-                value
-                    ? "block"
-                    : "none";
-
-        }
-    );
-
-
-
-document
-    .getElementById(
-        "clearSearch"
-    )
-    .addEventListener(
-        "click",
-        () => {
-
-            document
-                .getElementById(
-                    "search"
-                )
-                .value = "";
-
-
-            document
-                .getElementById(
-                    "clearSearch"
-                )
-                .style.display =
-                "none";
-
-
-            loadProducts();
-
-        }
-    );
-
-
-
-/* =====================================================
-   ESCOLHER IMAGEM
-===================================================== */
-
+/* ==========================================
+   PREVIEW DA IMAGEM
+========================================== */
 
 let selectedImage = "";
 
 
 document
-    .getElementById(
-        "image"
-    )
-    .addEventListener(
-        "change",
-        event => {
+.getElementById("image")
+.addEventListener("change",function(event){
 
-            const file =
-                event.target.files[0];
+    const file =
+        event.target.files[0];
 
 
-            if(!file)
-                return;
+    if(!file){
+
+        return;
+
+    }
 
 
-            const reader =
-                new FileReader();
+    const reader =
+        new FileReader();
 
 
-            reader.onload =
-                () => {
+    reader.onload =
+        function(){
 
-                    selectedImage =
-                        reader.result;
-
-
-                    document
-                        .getElementById(
-                            "preview"
-                        )
-                        .innerHTML = `
-
-                            <img
-                                src="${selectedImage}"
-                                style="
-                                    width:100%;
-                                    max-height:220px;
-                                    object-fit:contain;
-                                    margin-top:12px;
-                                    border-radius:14px;
-                                "
-                            >
-
-                        `;
-
-                };
+            selectedImage =
+                reader.result;
 
 
-            reader.readAsDataURL(
-                file
-            );
+            document
+            .getElementById("preview")
+            .innerHTML = `
 
-        }
-    );
+                <img
+                    src="${selectedImage}"
+                >
+
+            `;
+
+        };
 
 
+    reader.readAsDataURL(file);
 
-/* =====================================================
+});
+
+
+/* ==========================================
    ADICIONAR PRODUTO
-===================================================== */
-
+========================================== */
 
 document
-    .getElementById(
-        "add"
-    )
-    .addEventListener(
-        "click",
-        async () => {
+.getElementById("addProduct")
+.addEventListener("click",async function(){
 
-            const name =
-                document
-                    .getElementById(
-                        "name"
-                    )
-                    .value
-                    .trim();
+    const name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
 
 
-            const link =
-                document
-                    .getElementById(
-                        "link"
-                    )
-                    .value
-                    .trim();
+    const link =
+        document
+        .getElementById("link")
+        .value
+        .trim();
 
 
-            const errorBox =
-                document
-                    .getElementById(
-                        "formError"
-                    );
+    const message =
+        document
+        .getElementById("formMessage");
 
 
-            if(
-                !name ||
-                !link
-            ){
+    if(!name){
 
-                errorBox.textContent =
-                    "Preencha o nome e o link.";
+        message.className = "error";
 
-                return;
+        message.textContent =
+            "Digite o nome do produto.";
 
-            }
+        return;
 
-
-            if(
-                !selectedImage
-            ){
-
-                errorBox.textContent =
-                    "Escolha uma imagem.";
-
-                return;
-
-            }
+    }
 
 
-            errorBox.textContent =
-                "Adicionando...";
+    if(!link){
+
+        message.className = "error";
+
+        message.textContent =
+            "Digite o link do produto.";
+
+        return;
+
+    }
 
 
-            /*
-                OBSERVAÇÃO:
+    if(!selectedImage){
 
-                Nesta primeira versão,
-                a imagem é enviada como
-                texto para o banco.
+        message.className = "error";
 
-                Para uma versão definitiva,
-                vamos colocar as imagens
-                no Supabase Storage.
-            */
+        message.textContent =
+            "Escolha uma imagem.";
 
+        return;
 
-            const {
-                error
-            } =
-                await supabaseClient
-
-                    .from(
-                        "produtos"
-                    )
-
-                    .insert({
-
-                        nome:name,
-
-                        imagem:selectedImage,
-
-                        link:link
-
-                    });
+    }
 
 
-            if(error){
+    message.className = "success";
 
-                console.error(
-                    error
-                );
-
-
-                errorBox.textContent =
-                    "Erro ao adicionar produto.";
-
-                return;
-
-            }
+    message.textContent =
+        "Adicionando produto...";
 
 
-            document
-                .getElementById(
-                    "name"
-                )
-                .value = "";
+    const result =
+        await supabaseClient
+        .from("produtos")
+        .insert({
+
+            nome:name,
+
+            imagem:selectedImage,
+
+            link:link
+
+        });
 
 
-            document
-                .getElementById(
-                    "link"
-                )
-                .value = "";
+    if(result.error){
+
+        console.error(
+            result.error
+        );
+
+        message.className = "error";
+
+        message.textContent =
+            "Erro ao adicionar produto.";
+
+        return;
+
+    }
 
 
-            document
-                .getElementById(
-                    "image"
-                )
-                .value = "";
+    document
+    .getElementById("name")
+    .value = "";
 
 
-            document
-                .getElementById(
-                    "preview"
-                )
-                .innerHTML = "";
+    document
+    .getElementById("link")
+    .value = "";
 
 
-            selectedImage = "";
+    document
+    .getElementById("image")
+    .value = "";
 
 
-            errorBox.textContent =
-                "Produto adicionado!";
+    document
+    .getElementById("preview")
+    .innerHTML = "";
 
 
-            renderAdmin();
-
-        }
-    );
+    selectedImage = "";
 
 
+    message.className = "success";
 
-/* =====================================================
-   LISTA DA ABA DONO
-===================================================== */
+    message.textContent =
+        "Produto adicionado com sucesso!";
 
 
-async function renderAdmin(){
+    loadProducts();
+
+    loadAdminProducts();
+
+});
+
+
+/* ==========================================
+   LISTA DO DONO
+========================================== */
+
+async function loadAdminProducts(){
 
     const list =
         document
-            .getElementById(
-                "adminList"
-            );
+        .getElementById("adminList");
 
 
     list.innerHTML =
         "Carregando...";
 
 
-    const {
-        data,
-        error
-    } =
+    const result =
         await supabaseClient
-
-            .from(
-                "produtos"
-            )
-
-            .select(
-                "*"
-            )
-
-            .order(
-                "criado_em",
-                {
-                    ascending:false
-                }
-            );
+        .from("produtos")
+        .select("*")
+        .order(
+            "criado_em",
+            {
+                ascending:false
+            }
+        );
 
 
-    if(error){
+    if(result.error){
 
         list.innerHTML =
             "Erro ao carregar produtos.";
+
+        console.error(
+            result.error
+        );
 
         return;
 
@@ -1822,10 +1084,7 @@ async function renderAdmin(){
     list.innerHTML = "";
 
 
-    if(
-        !data ||
-        data.length === 0
-    ){
+    if(!result.data.length){
 
         list.innerHTML = `
 
@@ -1842,141 +1101,109 @@ async function renderAdmin(){
     }
 
 
-    data.forEach(
-        product => {
+    result.data.forEach(function(product){
 
-            const item =
-                document.createElement(
-                    "div"
+        const item =
+            document.createElement("div");
+
+
+        item.className =
+            "admin-item";
+
+
+        item.innerHTML = `
+
+            ${
+                product.imagem
+
+                ?
+
+                `<img
+                    class="admin-thumb"
+                    src="${product.imagem}"
+                >`
+
+                :
+
+                `<div class="admin-thumb">
+                    🛍️
+                </div>`
+            }
+
+
+            <div class="admin-name">
+
+                ${escapeHTML(product.nome)}
+
+            </div>
+
+
+            <button
+                class="delete"
+            >
+
+                Deletar
+
+            </button>
+
+        `;
+
+
+        item
+        .querySelector(".delete")
+        .addEventListener(
+            "click",
+            function(){
+
+                deleteProduct(
+                    product.id
                 );
 
-
-            item.className =
-                "admin-item";
-
-
-            item.innerHTML = `
-
-                ${
-                    product.imagem
-
-                    ?
-
-                    `<img
-                        class="admin-thumb"
-                        src="${product.imagem}"
-                    >`
-
-                    :
-
-                    `<div
-                        class="admin-thumb"
-                        style="
-                            display:flex;
-                            align-items:center;
-                            justify-content:center;
-                            font-size:25px;
-                        "
-                    >
-                        🛍️
-                    </div>`
-                }
+            }
+        );
 
 
-                <div
-                    class="admin-name"
-                >
+        list.appendChild(item);
 
-                    ${escapeHtml(
-                        product.nome
-                    )}
-
-                </div>
-
-
-                <button
-                    class="delete"
-                >
-
-                    Deletar
-
-                </button>
-
-            `;
-
-
-            item
-                .querySelector(
-                    ".delete"
-                )
-                .addEventListener(
-                    "click",
-                    () => {
-
-                        deleteProduct(
-                            product.id
-                        );
-
-                    }
-                );
-
-
-            list.appendChild(
-                item
-            );
-
-        }
-    );
+    });
 
 }
 
 
+/* ==========================================
+   DELETAR
+========================================== */
 
-/* =====================================================
-   DELETAR PRODUTO
-===================================================== */
+async function deleteProduct(id){
 
-
-async function deleteProduct(
-    id
-){
-
-    if(
-        !confirm(
+    const ok =
+        confirm(
             "Deseja deletar este produto?"
-        )
-    ){
+        );
+
+
+    if(!ok){
 
         return;
 
     }
 
 
-    const {
-        error
-    } =
+    const result =
         await supabaseClient
-
-            .from(
-                "produtos"
-            )
-
-            .delete()
-
-            .eq(
-                "id",
-                id
-            );
+        .from("produtos")
+        .delete()
+        .eq("id",id);
 
 
-    if(error){
+    if(result.error){
 
         alert(
-            "Não foi possível deletar."
+            "Erro ao deletar produto."
         );
 
         console.error(
-            error
+            result.error
         );
 
         return;
@@ -1986,90 +1213,78 @@ async function deleteProduct(
 
     loadProducts();
 
-    renderAdmin();
+    loadAdminProducts();
 
 }
 
 
-
-/* =====================================================
+/* ==========================================
    REALTIME
-===================================================== */
-
+========================================== */
 
 supabaseClient
+.channel("produtos-realtime")
+.on(
+    "postgres_changes",
+    {
+        event:"*",
+        schema:"public",
+        table:"produtos"
+    },
+    function(){
 
-    .channel(
-        "produtos-em-tempo-real"
-    )
+        loadProducts();
 
-    .on(
+        loadAdminProducts();
 
-        "postgres_changes",
-
-        {
-            event:"*",
-
-            schema:"public",
-
-            table:"produtos"
-
-        },
-
-        () => {
-
-            loadProducts();
-
-            renderAdmin();
-
-        }
-
-    )
-
-    .subscribe();
+    }
+)
+.subscribe();
 
 
+/* ==========================================
+   VISITANTE
+========================================== */
 
-/* =====================================================
-   CONTADOR DE VISITANTES
-===================================================== */
+async function registerVisitor(){
 
-
-/*
-    Para o contador total funcionar
-    entre TODOS os aparelhos,
-    precisamos de uma tabela própria.
-
-    Crie essa tabela no Supabase
-    com o SQL que vou passar abaixo.
-*/
+    const visitorId =
+        localStorage.getItem(
+            "visitor_id"
+        );
 
 
-async function registerVisit(){
+    if(visitorId){
 
-    const {
-        data,
-        error
-    } =
+        return;
+
+    }
+
+
+    const id =
+        crypto.randomUUID();
+
+
+    localStorage.setItem(
+        "visitor_id",
+        id
+    );
+
+
+    const result =
         await supabaseClient
+        .from("visitas")
+        .insert({
 
-            .from(
-                "visitas"
-            )
+            visitante_id:id
 
-            .insert({
-
-                visitante:
-                    crypto.randomUUID()
-
-            });
+        });
 
 
-    if(error){
+    if(result.error){
 
         console.error(
-            "Erro visitante:",
-            error
+            result.error
         );
 
     }
@@ -2077,37 +1292,28 @@ async function registerVisit(){
 }
 
 
+/* ==========================================
+   TOTAL DE VISITANTES
+========================================== */
 
-/* =====================================================
-   CARREGAR TOTAL DE VISITANTES
-===================================================== */
+async function loadVisitors(){
 
-
-async function loadVisitorTotal(){
-
-    const {
-        count,
-        error
-    } =
+    const result =
         await supabaseClient
-
-            .from(
-                "visitas"
-            )
-
-            .select(
-                "*",
-                {
-                    count:"exact",
-                    head:true
-                }
-            );
+        .from("visitas")
+        .select(
+            "*",
+            {
+                count:"exact",
+                head:true
+            }
+        );
 
 
-    if(error){
+    if(result.error){
 
         console.error(
-            error
+            result.error
         );
 
         return;
@@ -2116,74 +1322,36 @@ async function loadVisitorTotal(){
 
 
     document
-        .getElementById(
-            "totalVisitors"
-        )
-        .textContent =
+    .getElementById(
+        "visitorTotal"
+    )
+    .textContent =
         Number(
-            count || 0
-        ).toLocaleString(
-            "pt-BR"
-        );
+            result.count || 0
+        ).toLocaleString("pt-BR");
 
 }
 
 
+/* ==========================================
+   ATUALIZAÇÃO DO CONTADOR
+========================================== */
 
-/* =====================================================
-   SEGURANÇA DE TEXTO
-===================================================== */
-
-
-function escapeHtml(
-    value
-){
-
-    return String(
-        value ?? ""
-    )
-
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-
-    .replace(
-        /</g,
-        "&lt;"
-    )
-
-    .replace(
-        />/g,
-        "&gt;"
-    )
-
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
+setInterval(
+    loadVisitors,
+    5000
+);
 
 
+/* ==========================================
+   INICIAR SITE
+========================================== */
 
-/* =====================================================
-   INICIALIZAÇÃO
-===================================================== */
-
-
-registerVisit();
+registerVisitor();
 
 loadProducts();
 
 </script>
 
-
 </body>
-
-</html>
+        </html>
